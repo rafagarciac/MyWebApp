@@ -1,0 +1,11 @@
+#DJango Start Project name
+django-admin startproject MyWebApp
+
+# Run/Deploy Application Server || Debug = True ||
+python manage.py runserver
+
+# Create new Application /...
+python manage.py startapp [NameApplication]
+
+# Syncronized SQLite Database with DJango
+python manage.py migrate
