@@ -9,3 +9,6 @@ python manage.py startapp [NameApplication]
 
 # Syncronized SQLite Database with DJango
 python manage.py migrate
+
+#Collect Static Library
+python .\manage.py collectstatic
