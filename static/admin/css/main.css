@@ -1,0 +1,58 @@
+body{
+    font-family: 'Lobster'
+}
+
+/*---------------------------------------------------------------------*/
+/*-------------------------   NAV-BAR PROPERTIES  ---------------------*/
+/*---------------------------------------------------------------------*/
+.transparent-style{
+    background-color: rgba(255, 255, 255, 0);
+}
+
+/*Override Nav-Link Bootstrap Properties*/
+.nav-link {
+    color: white;
+    font-size: 1.5em;
+}
+
+/*---------------------------------------------------------------------*/
+/*-------------------------   VIDEO PROPERTIES  -----------------------*/
+/*---------------------------------------------------------------------*/
+
+/* Put the video in the bg */
+#video_background { 
+ 
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+   
+    position: fixed;    
+    top: 50%;
+    left: 50%;
+
+    /*Modify this translates for change the view of video*/
+    transform: translateX(-50%) translateY(-60%); 
+    z-index: -100;
+    background-size: cover;
+   
+}
+
+/*Put the default view video*/
+#video_pattern { 
+	background:#fff; 
+	position: fixed; 
+	opacity: 0.8; 
+	left: 0px; 
+	top: 0px; 
+	width: 100%; 
+	height: 100%; 
+	z-index: 1; 
+}
+
+/*---------------------------------------------------------------------*/
+/*--------------------------   NAME PROPERTIES  -----------------------*/
+/*---------------------------------------------------------------------*/
+#name{
+    margin-top: 6%;
+}
