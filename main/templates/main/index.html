@@ -1,4 +1,5 @@
 {% load static %}
+{# load menu #}
 <!doctype html>
 <html lang="es">
   <head>
@@ -7,12 +8,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+    <!-- Icons - Favicon -->
+    <link rel="shortcut icon" href="{% static 'admin/img/favicon.ico' %}" />
+    <link rel="icon" href="{% static 'admin/img/favicon.ico' %}" type="image/x-icon" />
+
+    <!-- Animate CSS - https://github.com/daneden/animate.css -->
+    <link rel="stylesheet" href="{% static 'main/css/animate.css' %}">
+    <!-- Bootstrap CSS - https://github.com/twbs/bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/fonts.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/fonts.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}" />
   
   </head>
   <body>
@@ -20,9 +27,8 @@
     <!-- HEAD -->
     <div class="container-fluid">
 
-        <!-- NAV BAR -->
-
-            <nav class="navbar sticky-top navbar-expand-sm transparent-style">
+        <!-- NAV BAR --> 
+            <nav class="navbar navbar-dark sticky-top navbar-expand-sm transparent-style text-center">
                 <!--<a class="navbar-brand" href="/main">LOGO</a>-->
                 <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -30,8 +36,9 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavId">
                     <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/main">Home <span class="sr-only">(current)</span></a>
+                        <li class="nav-item">
+                            <!--<a class="nav-link {# active 'main' #}" href="{# url 'main' #}">Home <span class="sr-only">(current)</span></a>-->
+                            <a class="nav-link" href="/main">Home <span class="sr-only"></span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/blog">Blog</a>
@@ -58,7 +65,7 @@
             <!-- VIDEO -->
             
             <video autoplay="autoplay" loop="loop" id="video_background" preload="auto" volume="50"/>
-                <source src="{% static 'admin/video/Saigon_3840x2160.mp4' %}" type="video/mp4" />
+                <source src="{% static 'main/video/Saigon_3840x2160.mp4' %}" type="video/mp4" />
             </video/>
             
             <!--// VIDEO -->
@@ -66,16 +73,21 @@
     </div>
     <!--// HEAD -->
       
-    <div id="name" class="container-fluid">
-            <div class="container text-center">
-                <h1 class="display-2 text-white">Rafael García Cuéllar</h1>
-            </div>
+    <div id="name" class="container-fluid animated bounceInUp">
+        <div class="container text-center">
+            <h1 class="display-2 text-white">Rafael García Cuéllar</h1>
         </div>
+        <div class="container text-center">
+            <h2 class="text-white">Software Developer</h2>
+        </div>
+    </div>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+    <script src="{% static 'main/js/init.js' %}"></script>
+    </body>
 </html>
