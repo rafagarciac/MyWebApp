@@ -1,1 +1,1 @@
-console.log("Web Page Designed & Created by Rafael García Cuéllar ©")
+console.log("Web Application Designed & Created by Rafael García Cuéllar ©")

@@ -1,8 +1,15 @@
+##########################################################################################
+################################  C  O  M  M  A  N  D  S  ################################
+##########################################################################################
+
 #DJango Start Project name
 django-admin startproject MyWebApp
 
 # Run/Deploy Application Server || Debug = True ||
 python manage.py runserver
+
+#Crear SuperUsuario
+python manage.py createsuperuser
 
 # Create new Application /...
 python manage.py startapp [NameApplication]
@@ -11,4 +18,27 @@ python manage.py startapp [NameApplication]
 python manage.py migrate
 
 #Collect Static Library
-python .\manage.py collectstatic
+python manage.py collectstatic
+
+#Activar los modelos de las Apps
+python manage.py makemigrations [NameApplication]
+
+#Migrar modelos de Python a SQLite
+python manage.py sqlmigrate [NameApplication] [NumCreado] #blog\migrations\0001_initial.py
+#Nota EJECUTAR DE NUEVO EL COMANDO migrate
+
+#Para iniciar una Shell de Python en Console
+python manage.py shell
+
+##########################################################################################
+###########################  D A T A B A S E   R E S U L T S  ############################
+########################### D I S P L A Y   &   F I L T E R S ############################
+##########################################################################################
+#Importar los modelos en la Shell de Python
+from [NameApplication].models import [Model]    #Ej: from blog.models import Post
+
+#Realizar 'Consulta' SELECT *...
+[Model].objects.all()   # Ej: Post.objects.all()
+
+#1º Filtro Sencillo
+[Model].objects.filter([Column] = [Filter]) #Post.objects.filter(title = "Mi Primer Post con DJango")
