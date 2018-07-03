@@ -10,8 +10,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
   <body>
-      
-    <h1>BLOG</h1>
+    
+    {#My First for in Python !! 🎉🎉#}
+    <h1>All my Posts: </h1>
+    {% for post in all_posts %}
+        <h3><a href="/blog/{{post.idpost}}">{{ post.title }}</a></h3>
+    {% endfor %}
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
