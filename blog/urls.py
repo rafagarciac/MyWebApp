@@ -2,6 +2,8 @@ from django.conf.urls import url
 from django.views.generic import RedirectView
 from . import views
 
+app_name = 'blog'
+
 urlpatterns = [
     #Regular Expression r'regularExprsHere'
     # /blog/
