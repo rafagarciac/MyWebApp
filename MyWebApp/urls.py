@@ -19,12 +19,13 @@ from django.contrib import admin
 from django.urls import include, path
 
 
-handler404 = 'blog.views.handler404'
+handler404 = 'blog.views.error_404_view'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', include('main.urls')),
-    path('blog/', include('blog.urls'))
+    path('blog/', include('blog.urls')),
+    path('', include('blog.urls')),
 ]
 
 if settings.DEBUG:

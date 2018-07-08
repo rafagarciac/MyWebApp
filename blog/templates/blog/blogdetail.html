@@ -22,6 +22,12 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <!-- My Links References -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/fonts.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+
   </head>
   <body>
 
@@ -60,16 +66,16 @@
     </nav>    
     
     <!--// NAV BAR -->
-    <div class="container-fluid">
+    <div class="container-fluid mt-3">
         <div class="container">
             <form action="{% url 'blog:save' Post.idpost %}" method="post">
                 <div class="form-group">
                     {% csrf_token %}
                     <label for="idpost">IdPost</label>
-                    <input type="number" id="{{Post.idpost}}" class="form-control" name="idpost" value="{{Post.idpost}}" readonly></input>
+                    <input type="number" id="{{Post.idpost}}" class="form-control col-2" name="idpost" value="{{Post.idpost}}" readonly></input><br><br>
 
                     <label for="title">Title</label>
-                    <input type="text" id="{{Post.title}}" class="form-control" name="title", value="{{Post.title}}"></input>
+                    <input type="text" id="{{Post.title}}" class="form-control" name="title", value="{{Post.title}}"></input><br><br>
 
                     {# Implement & Apply https://www.froala.com/wysiwyg-editor HTML Edito Framework#}
                     <!-- Create a tag that we will use as the editable area. -->
@@ -77,14 +83,16 @@
                     
                     <label for="content">Content</label>
                     <div id="froala_editor">{% autoescape off %}{{ Post.content }}{% endautoescape %}</div>
+                    <small id="fill" class="form-text text-muted"> Fill it, with your make-believe!!</small><br><br>
                     
                     <input type="hidden" id="content" name="content">
+                    <input type="hidden" id="textcontent" name="textcontent">
                     <!--<input type="text" id="froala_editor" name="content" value="{{Post.content}}"></input>-->
-                        
-                    <label for="date">Date</label>
-                    <input type="date" id="{{Post.date}}" class="form-control" name="date", value="{{Post.date}}"></input>
                     
-                    <button type="submit" id="save" class="btn btn-success btn-block"> Submit </button>
+                    <label for="date">Date</label>
+                    <input type="date" id="{{Post.date}}" class="form-control" name="date", value="{{Post.date}}"></input><br><br>
+                    
+                    <button type="submit" id="save" class="btn btn-success btn-block mb-5"> Submit </button>
                 </div>
             </form>
 
@@ -138,7 +146,9 @@
         // When do the Submit of EditForm, Assign the html.get of FroalaEditor to Hidden input with id=content  
         $("form").submit(function( event ) {
             var contentValue = $('#froala_editor').froalaEditor('html.get');
-            $('#content').val(contentValue)
+            $('#content').val(contentValue);
+            $('#textcontent').val(jQuery(contentValue).text());
+
         });
     }); </script>
   </body>

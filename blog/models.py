@@ -5,6 +5,7 @@ class Post(models.Model):
     idpost = models.AutoField(primary_key=True)
     title = models.CharField(max_length=300)
     content = models.TextField()
+    textcontent = models.TextField(default="Some text")
     date = models.DateField()
 
     def __str__(self):

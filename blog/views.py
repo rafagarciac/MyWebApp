@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from .models import Post
+import time
 
 # Create your views here.
 def index (request):
@@ -11,6 +12,10 @@ def index (request):
                 content_type=None,
                 status=None,
                 using=None)
+                
+def error_404_view(request, exception):
+    data = {"name": "ThePythonDjango.com"}
+    return render(request,'blog/404.html', data)
     
 def blogdetail (request, idpost):
     print("Method: " + request.method)
@@ -36,7 +41,12 @@ def save (request, idpost):
     else:
         post.title = request.POST['title']
         post.content = request.POST['content']
-        post.date = request.POST['date']
+        post.textcontent = request.POST['textcontent']
+        if not post.date:
+            post.date = request.POST['date']
+        else:
+            #Current Date   Format: yyyy-mm-dd
+            post.date = time.strftime("%Y-%m-%d")
         post.save()
         return render(request, 'blog/blogdetail.html', {'Post': post})
         
