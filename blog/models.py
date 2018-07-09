@@ -11,6 +11,3 @@ class Post(models.Model):
     def __str__(self):
         return self.idpost.__str__() + ". " + self.title + " (" + self.date.__str__() + ")"
         #return "\n ID: " + self.idpost.__str__() + "\n Titulo: " + self.title + "\n Contenido: " + self.content + "\n Fecha de Publicación: " + self.date.__str__() + "\n"
-        
-# class Profile
-# class Comment
