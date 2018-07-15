@@ -46,12 +46,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/aboutme">About Me</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <!--<li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-user"></i> Login
                             </a>
                             <form class="dropdown-menu p-4 text-center" action="{% url 'main:viewlogin' %}" method="post" aria-labelledby="navbarDropdownMenuLink">
                                 {% csrf_token %}
+                                
+                                {% if request.session.username == null %}
                                 <div class="form-group">
                                     <label for="exampleDropdownFormEmail2">Email address</label>
                                     <input type="text" class="form-control" name="username" id="exampleDropdownFormEmail2" placeholder="UserName">
@@ -64,19 +66,13 @@
                                     <input type="checkbox" class="form-check-input" id="dropdownCheck2">
                                     <label class="form-check-label" for="dropdownCheck2">Remember me </label>
                                 </div>
-                                {% if request.session.username != null %}
-                                    <button type="submit" name="sign" value="signout" class="btn btn-danger">Sign Out</button>
+                                <button type="submit" name="sign" value="signin" class="btn btn-primary">Sign in</button>
                                 {% else %}
-                                    <button type="submit" name="sign" value="signin" class="btn btn-primary">Sign in</button>
+                                    <button type="submit" name="sign" value="signout" class="btn btn-danger">Sign Out</button>
                                 {% endif %}
                             </form>
                             
-                            <form class="dropdown-menu p-4 text-center" action="{% url 'main:viewlogout' %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">Sign Out</button>
-                            </form>
-                            
-                        </li>
+                        </li>-->
                         <li class="nav-item">
                             <a class="nav-link" href="/cv">CV</a>
                         </li>

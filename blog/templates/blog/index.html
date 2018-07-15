@@ -66,15 +66,25 @@
       <div class="container">
 
       {% for post in all_posts %}
+
             <a href="{% url 'blog:blogdetail' post.idpost %}">
-              <div class="card mb-5 shadowbox">
-                <img class="card-img-top img-fluid" src="https://placehold.it/894x180?text=894%20x%20180" alt="RandomImage">
-                <div class="card-body">
-                  <h5 class="card-title text-center">{{ post.title }}</h5>
-                  <p class="card-text text-left">{{ post.textcontent }}</p>
-                  <p class="card-text text-right"><small class="text-muted"><i class="far fa-clock"></i> {{ post.date }} </small></p>
+                <div class="row shadowbox mb-5">
+                    <div class="col-3 p-0">
+                        <img src="https://placehold.it/250x250?text=Test" alt="" class="img-fluid"/>
+                    </div>
+                    <div class="col-9">
+                        <!--Title -->
+                        <h2>{{ post.title }}</h2>
+                        <!--Content-->
+                        <p>{{ post.textcontent }}</p>
+                        <!--Author & Date-->
+                        <div class="row justify-content-around">
+                            <div class="col-3"><p><small class="text-muted"><i class="fas fa-user"></i> {{ post.author }} </small></p></div>
+                            <div class="col-3"><p><small class="text-muted"><i class="fas fa-tags"></i> IT|Components|OpenSource|Software {# post.tags #} </small></p></div>
+                            <div class="col-3"><p><small class="text-muted"><i class="far fa-clock"></i> {{ post.date }} </small></p></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </a>
       {% endfor %}
 

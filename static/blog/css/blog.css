@@ -4,3 +4,47 @@
 .shadowbox {
     box-shadow: 10px 10px 5px grey;
 }
+
+/*---------------------------------------------------------------------*/
+/*--------------------   SOCIAL BUTTONS - REFERENCES ------------------*/
+/*---------------------------------------------------------------------*/
+
+.circle-button {
+
+    display:block;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid rgb(0, 0, 0);    
+    background-color: rgb(122, 122, 209);
+}
+
+.icon-circle-f {
+    color: white;
+    font-size: 30px;
+    padding-top: 20%;
+    padding-left: 30%;
+}
+.icon-circle-t {
+    color: white;
+    font-size: 30px;
+    padding-top: 20%;
+    padding-left: 20%;
+}
+.icon-circle-em {
+    color: white;
+    font-size: 30px;
+    padding-top: 20%;
+    padding-left: 18%;
+}
+
+/*---------------------------------------------------------------------*/
+/*------------------------   CONTENT - LAYOUT -------------------------*/
+/*---------------------------------------------------------------------*/
+
+#content {
+    border: 0.1px solid rgb(0, 0, 0);
+    background-color: rgba(221, 221, 221, 0.11);
+    box-shadow: 2px 2px 8px grey;
+
+}

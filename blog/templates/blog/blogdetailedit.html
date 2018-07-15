@@ -11,10 +11,18 @@
     <link rel="shortcut icon" href="{% static 'admin/img/favicon.ico' %}" />
     <link rel="icon" href="{% static 'admin/img/favicon.ico' %}" type="image/x-icon" />
 
+    <!-- Froala Editor Dependencies -->
+    <!-- Include external CSS. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+ 
+    <!-- Include Editor style. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    
     <!-- My Links References -->
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/fonts.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}" />
@@ -24,6 +32,7 @@
   <body>
 
     <!-- NAV BAR --> 
+    
     <nav class="navbar navbar-dark bg-dark sticky-top navbar-expand-sm text-center">
         <!--<a class="navbar-brand" href="/main">LOGO</a>-->
         <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
@@ -57,52 +66,36 @@
     </nav>    
     
     <!--// NAV BAR -->
-    
-    <!-- POST - CONTENT -->
     <div class="container-fluid mt-3">
         <div class="container">
-            
-            <!-- Section & Title-->
-            <div class="row">
-                <div class="col-12"><h2 class="text-muted">{{ Post.section }}</h2></div>
-                <div class="col-12"><h1 class="display-3">{{ Post.title }}</h1></div>
-            </div>
+            <form action="{% url 'blog:save' Post.idpost %}" method="post">
+                <div class="form-group">
+                    {% csrf_token %}
+                    <label for="idpost">IdPost</label>
+                    <input type="number" id="{{Post.idpost}}" class="form-control col-2" name="idpost" value="{{Post.idpost}}" readonly></input><br><br>
 
-            <hr>
+                    <label for="title">Title</label>
+                    <input type="text" id="{{Post.title}}" class="form-control" name="title", value="{{Post.title}}"></input><br><br>
 
-            <!-- Author -->
-            <div class="row">
-                <div class="col-12 text-center text-md-left">
-                    <h3><i class="fa fa-user-circle"></i> By {{ Post.author }}</h3>
-                    <p class="mt-3 mb-3"><i class="fa fa-calendar"></i> &nbsp;&nbsp; {{ Post.date }} </p>
+                    {# Implement & Apply https://www.froala.com/wysiwyg-editor HTML Edito Framework#}
+                    <!-- Create a tag that we will use as the editable area. -->
+                    <!-- You can use a div tag as well. -->
+                    
+                    <label for="content">Content</label>
+                    <div id="froala_editor">{% autoescape off %}{{ Post.content }}{% endautoescape %}</div>
+                    <small id="fill" class="form-text text-muted"> Fill it, with your make-believe!!</small><br><br>
+                    
+                    <input type="hidden" id="content" name="content">
+                    <input type="hidden" id="textcontent" name="textcontent">
+                    <!--<input type="text" id="froala_editor" name="content" value="{{Post.content}}"></input>-->
+                    
+                    <label for="date">Date</label>
+                    <input type="date" id="{{Post.date}}" class="form-control" name="date", value="{{Post.date}}"></input><br><br>
+                    
+                    <button type="submit" id="save" class="btn btn-success btn-block mb-5"> Submit </button>
                 </div>
-            </div>
+            </form>
 
-            <!-- Share Social Networks -->
-            <div class="row mt-3 mb-3">
-                <div class="col-12 d-flex justify-content-around">
-                        <a class="circle-button" href="javascript:fbShare('{{ Post.title }}', 'Fb Share', 'Facebook share popup', '{{ Post.title }}', 520, 350)" style="background-color: #3b5999"><i class="fa fa-facebook-f icon-circle-f"></i></a>
-                        <a class="circle-button" href="https://twitter.com/" style="background-color: #55acee"><i class="fa fa-twitter icon-circle-t"></i></a>       
-                        <a class="circle-button" href="https://www.linkedin.com/" style="background-color: #0077B5"><i class="fa fa-linkedin icon-circle-t"></i></a>       
-                        <a class="circle-button" href="https://www.instagram.com/" style="background-color: #e4405f"><i class="fa fa-instagram icon-circle-t"></i></a>       
-                        <a class="circle-button" href="mailto:r.gc@hotmail.es?subject={{Post.title}}?body={{Post.textcontent}}" style="background-color: #131418"><i class="fa fa-envelope icon-circle-em"></i></a>       
-                        <!--    <svg width="200px" height="200px" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                            <line x1="40" y1="20" x2="80" y2="20" style="stroke: black;"/>
-                            <line x1="0.7cm" y1="1cm" x2="0.7cm" y2="2.0cm"
-                                style="stroke: black;"/>
-                            <line x1="30" y1="30" x2="85" y2="85" style="stroke: black;"/>
-                        </svg>      
-                    -->             
-                </div>
-            </div>
-
-            <hr>
-
-            <!-- Main Content -->
-            <div id="content" class="p-4 mt-2 mb-4">            
-                {% autoescape off %}{{ Post.content }}{% endautoescape %}
-            </div>
-          
 
     <!-- DISQUS Third Party-->
             <div id="disqus_thread"></div>
@@ -128,8 +121,6 @@
 
         </div>
     </div>
-
-    <!--// POST - CONTENT -->
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -137,7 +128,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script id="dsq-count-scr" src="//rafagc.disqus.com/count.js" async></script>
-    <script src="{% static 'main/js/init.js' %}"></script>
-    <script src="{% static 'blog/js/share-action-buttons.js' %}"></script>
+
+    <!-- Froala Editor Javascript -->
+    <!-- Include external JS libs. -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+ 
+    <!-- Include Editor JS files. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/js/froala_editor.pkgd.min.js"></script>
+ 
+    <!-- Initialize the editor. -->
+    <script> $(function() { 
+        $('#froala_editor').froalaEditor() 
+        //$('#froala_editor').froalaEditor('html.set', '{{Post.content}}');
+        
+        // When do the Submit of EditForm, Assign the html.get of FroalaEditor to Hidden input with id=content  
+        $("form").submit(function( event ) {
+            var contentValue = $('#froala_editor').froalaEditor('html.get');
+            $('#content').val(contentValue);
+            $('#textcontent').val(jQuery(contentValue).text());
+
+        });
+    }); </script>
   </body>
 </html>
