@@ -1,4 +1,20 @@
 /*---------------------------------------------------------------------*/
+/*-----------------------------   GENERAL  ----------------------------*/
+/*---------------------------------------------------------------------*/
+a{
+    color: black;
+}
+a:hover {
+    text-decoration: none;
+    color: rgb(101, 101, 240);
+    font-size: 1.5em;
+    -webkit-transition: color 1s, font-size 1s;   /*Safari*/
+    -moz-transition: color 1s, font-size 1s;      /*MozillaFirefox*/
+    -o-transition: color 1s, font-size 1s;        /*Opera*/
+    transition: color 1s, font-size 1s;           /*Chrome & Others*/
+}
+
+/*---------------------------------------------------------------------*/
 /*-------------------------   BOX-SHADOW PROPERTIES  ---------------------*/
 /*---------------------------------------------------------------------*/
 .shadowbox {

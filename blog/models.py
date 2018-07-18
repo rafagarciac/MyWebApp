@@ -2,7 +2,7 @@ from django.db import models
 import os
 
 def get_image_path(instance, filename):
-    return os.path.join('photos', str(instance.id), filename)
+    return os.path.join(str(instance.idpost), filename)
 
 # Create your models here.
 class Post(models.Model):
@@ -12,8 +12,8 @@ class Post(models.Model):
     textcontent = models.TextField(default="Some text")
     author = models.CharField(max_length=50, default="Rafael García")
     section = models.CharField(max_length=50, default="General")
-    #tags = models.TextField(default="general") IT|Components|OpenSource|Software|School
-    #image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    tags = models.TextField(default="general") #IT|Components|OpenSource|Software|School
+    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
     date = models.DateField()
 
     def __str__(self):
