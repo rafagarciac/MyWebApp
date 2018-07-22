@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,7 +12,53 @@
   </head>
   <body>
       
-    <p>LIST POSTS</p>
+    <div class="container-fluid text-center">
+
+      <h1>LIST POSTS</h1>
+      {% if 'username' in request.session %} 
+        <form action="{% url 'administrator:viewlogout' %}" method="post">
+          {% csrf_token %}
+          <button class="btn btn-danger">LOGOUT</button>
+        </form>
+      {% endif %}
+
+      <!-- TABLE RESPONSIVE -->
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Section</th>
+              <th scope="col">Author</th>
+              <th scope="col">Tags</th>
+              <th scope="col">Date</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+
+              {% for post in posts%}
+                <tr>
+                  <th scope="row">{{post.idpost}}</th>
+                  <td>{{post.title}}</td>
+                  <td>{{post.section}}</td>
+                  <td>{{post.author}}</td>
+                  <td>{{post.tags}}</td>
+                  <td>{{post.date}}</td>
+                  <td><a href="{% url 'administrator:blogedit' post.idpost %}"><button class="btn btn-warning">Edit Post</button></a></td>
+                  <td><a href="{% url 'administrator:blogremove' post.idpost %}"><button class="btn btn-danger">Remove</button></a></td>
+                </tr>
+
+              {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+      
+      <!--// TABLE RESPONSIVE -->
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

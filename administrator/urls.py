@@ -8,5 +8,8 @@ urlpatterns = [
     #Regular Expression r'regularExprsHere'
     # /blog/
     url(r'^$', views.loginindex, name='loginindex'),
-    url(r'blogedit', views.viewlogin, name='viewlogin'),
+    url(r'blog', views.viewlogin, name='viewlogin'),
+    url(r'logout', views.viewlogout, name='viewlogout'),
+    url(r'^remove/(?P<idpost>[0-9]+)', views.blogremove, name='blogremove'),
+    url(r'^edit/(?P<idpost>[0-9]+)', views.blogedit, name='blogedit'),
 ]

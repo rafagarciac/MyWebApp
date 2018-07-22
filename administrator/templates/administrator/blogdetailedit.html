@@ -66,11 +66,16 @@
     </nav>    
     
     <!--// NAV BAR -->
+
     <div class="container-fluid mt-3">
         <div class="container">
             <form action="{% url 'blog:save' Post.idpost %}" method="post">
                 <div class="form-group">
                     {% csrf_token %}
+
+                    <!-- Back button
+                        <input action="action" onclick="window.history.go(-1); return false;" type="button" value="Back" /> -->
+
                     <label for="idpost">IdPost</label>
                     <input type="number" id="{{Post.idpost}}" class="form-control col-2" name="idpost" value="{{Post.idpost}}" readonly></input><br><br>
 

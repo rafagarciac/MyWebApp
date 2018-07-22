@@ -42,3 +42,6 @@ from [NameApplication].models import [Model]    #Ej: from blog.models import Pos
 
 #1º Filtro Sencillo
 [Model].objects.filter([Column] = [Filter]) #Post.objects.filter(title = "Mi Primer Post con DJango")
+
+## Exit from Shell
+exit()
