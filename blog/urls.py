@@ -12,6 +12,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     # /blog/[IDBlog]/
     url(r'^(?P<idpost>[0-9]+)/$', views.blogdetail, name='blogdetail'),
-    url(r'^(?P<idpost>[0-9]+)', views.save, name='save'),
     url(r'^favicon\.ico$',RedirectView.as_view(url='/static/admin/img/favicon.ico')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

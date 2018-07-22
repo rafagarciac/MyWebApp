@@ -29,24 +29,4 @@ def blogdetail (request, idpost):
                 content_type=None, 
                 status=None, 
                 using=None)
-
-def save (request, idpost):
-    try:
-        post = Post.objects.get(pk=request.POST['idpost'])
-    except (KeyError, Post.DoesNotExist):
-        return render( request, 'blog/blogdetail.html', {
-            'Post': post,
-            'error_message': "You didn't save a Valid Post",
-            })
-    else:
-        post.title = request.POST['title']
-        post.content = request.POST['content']
-        post.textcontent = request.POST['textcontent']
-        if not post.date:
-            post.date = request.POST['date']
-        else:
-            #Current Date   Format: yyyy-mm-dd
-            post.date = time.strftime("%Y-%m-%d")
-        post.save()
-        return render(request, 'blog/blogdetail.html', {'Post': post})
         

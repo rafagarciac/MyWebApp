@@ -2,6 +2,7 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render
+import time
 #Import Posts from blog Application for add, edit & remove Posts 
 from blog.models import Post
 
@@ -64,6 +65,33 @@ def blogedit (request, idpost):
                         status=None, 
                     using=None)
 
+def save (request, idpost):
+    try:
+        post = Post.objects.get(pk=request.POST['idpost'])
+    except (KeyError, Post.DoesNotExist):
+        return render( request, 'administrator/blog.html', {
+            'Post': post,
+            'error_message': "You didn't save a Valid Post",
+            })
+    else:
+        post.title = request.POST['title']
+        post.content = request.POST['content']
+        post.textcontent = request.POST['textcontent']
+        post.tags = request.POST['tags']
+        post.section = request.POST['section']
+        if not post.date:
+            post.date = request.POST['date']
+        else:
+            #Current Date   Format: yyyy-mm-dd
+            post.date = time.strftime("%Y-%m-%d")
+        post.save()
+        # Redirect to List of Blogs
+        all_posts = get_list_or_404(Post.objects.all())
+        context = {'posts': all_posts}
+        return render(request, 'administrator/blog.html', context=context, content_type=None, status=None, using=None)
+        #Redirect to the same Post
+        #return render(request, 'administrator/blogdetailedit.html', {'Post': post})
+
 def blogremove (request, idpost):
     try:
         post = get_object_or_404(Post, pk = idpost)
@@ -77,4 +105,6 @@ def blogremove (request, idpost):
         all_posts = get_list_or_404(Post.objects.all())
         context = {'posts': all_posts}
         return render(request, 'administrator/blog.html', context=context, content_type=None, status=None, using=None)
+
+        
         

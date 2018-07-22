@@ -1,5 +1,5 @@
 {% load static %}
-{# load menu #}
+{% load filters %}
 <!doctype html>
 <html lang="es">
   <head>
@@ -37,50 +37,23 @@
                 <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavId">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <!--<a class="nav-link {# active 'main' #}" href="{# url 'main' #}">Home <span class="sr-only">(current)</span></a>-->
-                            <a class="nav-link" href="/main">Home <span class="sr-only"></span></a>
+                            <a class="nav-link {% active 'main' %}" href="/main">Home <span class="sr-only"></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/blog">Blog</a>
+                            <a class="nav-link {% active 'blog' %}" href="/blog">Blog <span class="sr-only"></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/aboutme">About Me</a>
-                        </li>
-                        <!--<li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-user"></i> Login
-                            </a>
-                            <form class="dropdown-menu p-4 text-center" action="{% url 'main:viewlogin' %}" method="post" aria-labelledby="navbarDropdownMenuLink">
-                                {% csrf_token %}
-                                
-                                {% if request.session.username == null %}
-                                <div class="form-group">
-                                    <label for="exampleDropdownFormEmail2">Email address</label>
-                                    <input type="text" class="form-control" name="username" id="exampleDropdownFormEmail2" placeholder="UserName">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleDropdownFormPassword2">Password</label>
-                                    <input type="password" class="form-control" name="password" id="exampleDropdownFormPassword2" placeholder="Password">
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="dropdownCheck2">
-                                    <label class="form-check-label" for="dropdownCheck2">Remember me </label>
-                                </div>
-                                <button type="submit" name="sign" value="signin" class="btn btn-primary">Sign in</button>
-                                {% else %}
-                                    <button type="submit" name="sign" value="signout" class="btn btn-danger">Sign Out</button>
-                                {% endif %}
-                            </form>
-                            
-                        </li>-->
+                            <a class="nav-link {% active 'aboutme' %}" href="/aboutme">About Me <span class="sr-only"></span></a>
+                       </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/cv">CV</a>
+                            <a class="nav-link {% active 'cv' %}" href="/cv">CV <span class="sr-only"></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/skills">Skills</a>
+                            <a class="nav-link {% active 'skills' %}" href="/skills">Skills <span class="sr-only"></span></a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link" href="/files">Cloud Files</a>
+                            <a class="nav-link {% active 'files' %}" href="/files">Cloud Files <span class="sr-only"></span></a>
                         </li>
                     </ul>
                 </div>

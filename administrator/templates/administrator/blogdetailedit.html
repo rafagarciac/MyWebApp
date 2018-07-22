@@ -20,6 +20,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- Tags Editor - https://goodies.pixabay.com/jquery/tag-editor/demo.html -->
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/vendor/jQuery-tagEditor/jquery.tag-editor.css' %}" />
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
@@ -69,7 +72,7 @@
 
     <div class="container-fluid mt-3">
         <div class="container">
-            <form action="{% url 'blog:save' Post.idpost %}" method="post">
+            <form action="{% url 'administrator:save' Post.idpost %}" method="post">
                 <div class="form-group">
                     {% csrf_token %}
 
@@ -81,6 +84,9 @@
 
                     <label for="title">Title</label>
                     <input type="text" id="{{Post.title}}" class="form-control" name="title", value="{{Post.title}}"></input><br><br>
+                    
+                    <label for="title">Section</label>
+                    <input type="text" id="{{Post.section}}" class="form-control" name="section", value="{{Post.section}}"></input><br><br>
 
                     {# Implement & Apply https://www.froala.com/wysiwyg-editor HTML Edito Framework#}
                     <!-- Create a tag that we will use as the editable area. -->
@@ -89,9 +95,15 @@
                     <label for="content">Content</label>
                     <div id="froala_editor">{% autoescape off %}{{ Post.content }}{% endautoescape %}</div>
                     <small id="fill" class="form-text text-muted"> Fill it, with your make-believe!!</small><br><br>
+
+                    <label for="tags">Tags</label>
+                    <textarea id="tags_textarea">
+                    </textarea><br>
+                    
                     
                     <input type="hidden" id="content" name="content">
                     <input type="hidden" id="textcontent" name="textcontent">
+                    <input type="hidden" id="tags" name="tags">
                     <!--<input type="text" id="froala_editor" name="content" value="{{Post.content}}"></input>-->
                     
                     <label for="date">Date</label>
@@ -134,27 +146,62 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script id="dsq-count-scr" src="//rafagc.disqus.com/count.js" async></script>
 
+
+     
+
     <!-- Froala Editor Javascript -->
-    <!-- Include external JS libs. -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- Include Editor JS files. -->    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
- 
+
     <!-- Include Editor JS files. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/js/froala_editor.pkgd.min.js"></script>
  
+ 
+    <!-- Tag editor JS Files -->
+    <script type="text/javascript" src="{% static 'blog/vendor/jQuery-tagEditor/jquery.tag-editor.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/vendor/jQuery-tagEditor/jquery.caret.min.js' %}"></script>
+    
+    <script src="{% static 'main/js/init.js' %}"></script>
+
     <!-- Initialize the editor. -->
-    <script> $(function() { 
+    <script> 
+        $(function() { 
         $('#froala_editor').froalaEditor() 
         //$('#froala_editor').froalaEditor('html.set', '{{Post.content}}');
         
-        // When do the Submit of EditForm, Assign the html.get of FroalaEditor to Hidden input with id=content  
-        $("form").submit(function( event ) {
-            var contentValue = $('#froala_editor').froalaEditor('html.get');
-            $('#content').val(contentValue);
-            $('#textcontent').val(jQuery(contentValue).text());
+            // When do the Submit of EditForm, Assign the html.get of FroalaEditor to Hidden input with id=content  
+            $("form").submit(function( event ) {
+                var contentValue = $('#froala_editor').froalaEditor('html.get');
+                var tagsValue = $('#tags_textarea').tagEditor('getTags')[0].tags;
+                tagsValue = tagsValue.toString().split(',');
 
+                var tags = "" 
+                tagsValue.forEach(function(tag) {
+                     var tagModified = "'" + tag + "'";
+                     tags += tagModified + ',';
+                });
+                tags = tags.substr(0, tags.length - 1);
+
+                $('#content').val(contentValue);
+                $('#textcontent').val(jQuery(contentValue).text());
+                $('#tags').val(tags);
+
+            });
+        }); 
+    </script>
+
+    <!-- Tag Editor -->
+    <script>
+
+        $('#tags_textarea').tagEditor({
+            clickDelete: true,
+            initialTags: [{% autoescape off %} {{ Post.tags }} {% endautoescape %}],
+            //initialTags: ['Hello', 'World'],
+            delimiter: ',', /* space and comma */
+            placeholder: 'Enter tags ...'
         });
-    }); </script>
+
+    </script>
   </body>
 </html>

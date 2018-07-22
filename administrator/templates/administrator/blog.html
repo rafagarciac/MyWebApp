@@ -1,4 +1,5 @@
 {% load static %}
+{% load filters %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -45,7 +46,7 @@
                   <td>{{post.title}}</td>
                   <td>{{post.section}}</td>
                   <td>{{post.author}}</td>
-                  <td>{{post.tags}}</td>
+                  <td>{{post.tags|replace}}</td>
                   <td>{{post.date}}</td>
                   <td><a href="{% url 'administrator:blogedit' post.idpost %}"><button class="btn btn-warning">Edit Post</button></a></td>
                   <td><a href="{% url 'administrator:blogremove' post.idpost %}"><button class="btn btn-danger">Remove</button></a></td>
