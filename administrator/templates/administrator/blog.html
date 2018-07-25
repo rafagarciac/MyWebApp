@@ -14,14 +14,30 @@
   <body>
       
     <div class="container-fluid text-center">
-
-      <h1>LIST POSTS</h1>
-      {% if 'username' in request.session %} 
-        <form action="{% url 'administrator:viewlogout' %}" method="post">
-          {% csrf_token %}
-          <button class="btn btn-danger">LOGOUT</button>
-        </form>
-      {% endif %}
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-10 text-center">
+            <h1>LIST POSTS</h1>
+          </div>
+          {% if 'username' in request.session %}
+            <!-- Logout --> 
+            <div class="col-12 col-md-2">
+              <form action="{% url 'administrator:viewlogout' %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger text-right mt-2">LOGOUT</button>
+              </form>
+            </div>
+          {% endif %}
+        </div>
+      
+        <!-- New Post -->
+        <div class="col-12 m-2">
+          <form action="{% url 'administrator:post-create' %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-success btn-block">NEW POST</button>
+          </form>
+        </div>
+      </div>
 
       <!-- TABLE RESPONSIVE -->
       <div class="table-responsive">
