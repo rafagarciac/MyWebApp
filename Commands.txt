@@ -45,3 +45,7 @@ from [NameApplication].models import [Model]    #Ej: from blog.models import Pos
 
 ## Exit from Shell
 exit()
+
+## Reset the Id AUTOINCREMENT in the Table
+UPDATE SQLITE_SEQUENCE SET seq = n WHERE name = 'blog_post'
+# Note: [n = n + 1], I mean If you want to reset the Id to 4, you'll have to put  n = 3 (n = 3 + 1 = 4)

@@ -32,7 +32,7 @@
       
         <!-- New Post -->
         <div class="col-12 m-2">
-          <form action="{% url 'administrator:post-create' %}" method="post">
+          <form action="{% url 'administrator:blognew' %}" method="post">
             {% csrf_token %}
             <button class="btn btn-success btn-block">NEW POST</button>
           </form>

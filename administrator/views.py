@@ -59,11 +59,7 @@ def blogedit (request, idpost):
             'error_message': "You didn't save a Valid Post",
             })
     else:
-        return render(request, 'administrator/blogdetailedit.html', 
-                    context={'Post': post}, 
-                    content_type=None, 
-                        status=None, 
-                    using=None)
+        return render(request, 'administrator/blogdetailedit.html', context={'Post': post}, content_type=None, status=None, using=None)
 
 def save (request, idpost):
     try:
@@ -79,11 +75,11 @@ def save (request, idpost):
         post.textcontent = request.POST['textcontent']
         post.tags = request.POST['tags']
         post.section = request.POST['section']
-        if not post.date:
-            post.date = request.POST['date']
-        else:
+        if request.POST['date'] == "" or request.POST['date'] is None:
             #Current Date   Format: yyyy-mm-dd
             post.date = time.strftime("%Y-%m-%d")
+        else:
+            post.date = request.POST['date']
         post.save()
         # Redirect to List of Blogs
         all_posts = get_list_or_404(Post.objects.all())
@@ -106,5 +102,11 @@ def blogremove (request, idpost):
         context = {'posts': all_posts}
         return render(request, 'administrator/blog.html', context=context, content_type=None, status=None, using=None)
 
-        
+def blognew (request):
+    post = Post()
+    post.date = time.strftime("%Y-%m-%d")
+    post.tags = ''
+    post.save()
+    return render(request, 'administrator/blogdetailedit.html', context={'Post': post}, content_type=None, status=None, using=None)
+    
         

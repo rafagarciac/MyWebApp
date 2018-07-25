@@ -107,7 +107,7 @@
                     <!--<input type="text" id="froala_editor" name="content" value="{{Post.content}}"></input>-->
                     
                     <label for="date">Date</label>
-                    <input type="date" id="{{Post.date}}" class="form-control" name="date", value="{{Post.date}}"></input><br><br>
+                    <input type="date" id="date" class="form-control" name="date"></input><br><br>
                     
                     <button type="submit" id="save" class="btn btn-success btn-block mb-5"> Submit </button>
                 </div>
@@ -163,9 +163,15 @@
     <script type="text/javascript" src="{% static 'blog/vendor/jQuery-tagEditor/jquery.caret.min.js' %}"></script>
     
     <script src="{% static 'main/js/init.js' %}"></script>
+    <script src="{% static 'blog/js/date_format.js' %}"></script>
+
+    <!-- Set input date Format - "yyyy-MM--dd" -->
+    <script>
+        $("#date").attr("value", formatDate('{{Post.date}}'));
+    </script>
 
     <!-- Initialize the editor. -->
-    <script> 
+    <script>
         $(function() { 
         $('#froala_editor').froalaEditor() 
         //$('#froala_editor').froalaEditor('html.set', '{{Post.content}}');

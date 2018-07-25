@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'blog', views.viewlogin, name='viewlogin'),
     url(r'logout', views.viewlogout, name='viewlogout'),
     url(r'^remove/(?P<idpost>[0-9]+)', views.blogremove, name='blogremove'),
+    url(r'add', views.blognew, name='blognew'),
     url(r'^edit/(?P<idpost>[0-9]+)', views.blogedit, name='blogedit'),
     url(r'^(?P<idpost>[0-9]+)', views.save, name='save'),
 ]
