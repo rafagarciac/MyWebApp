@@ -3,84 +3,225 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>BLOG EDIT</title>
+    <title>Administrator</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Icons - Favicon -->
+    <link rel="shortcut icon" href="{% static 'admin/img/favicon.ico' %}" />
+    <link rel="icon" href="{% static 'admin/img/favicon.ico' %}" type="image/x-icon" />
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <!-- Fon Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    
+    <!-- My Links References -->
+    <link rel="stylesheet" type="text/css" href="{% static 'administrator/css/lateral-menu.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'administrator/css/jquery.growl.css' %}" />
   </head>
   <body>
-      
-    <div class="container-fluid text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-md-10 text-center">
-            <h1>LIST POSTS</h1>
-          </div>
-          {% if 'username' in request.session %}
-            <!-- Logout --> 
-            <div class="col-12 col-md-2">
-              <form action="{% url 'administrator:viewlogout' %}" method="post">
-                {% csrf_token %}
-                <button class="btn btn-danger text-right mt-2">LOGOUT</button>
-              </form>
+
+    <!-- LATERAL NAV-BAR -->
+    <!-- Resource https://bootstrapious.com/p/bootstrap-sidebar-->
+    
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header text-center">
+                <h3>Administrator Menu</h3>
             </div>
-          {% endif %}
-        </div>
+
+            <ul class="list-unstyled components">
+                <p>Menu Options</p>
+                <hr>
+                <li class="{% active 'blog' %}">
+                    <a href="blog" aria-expanded="false"><i class="fa fa-rss" aria-hidden="true"></i> Blog</a>
+                    <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Blog</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>-->
+                </li>
+                <li class="{% active 'aboutme' %}">
+                    <a href="aboutme"><i class="fa fa-user" aria-hidden="true" aria-expanded="false"></i> About Me</a>
+                </li>
+                <li  class="{% active 'cv' %}">
+                  <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-briefcase" aria-hidden="true"></i> CV</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li  class="{% active 'skills' %}">
+                    <a href="skills"><i class="fa fa-code" aria-hidden="true"></i> Skills</a>
+                </li>
+                <li  class="{% active 'cloudfiles' %}">
+                    <a href="cloudfiles"><i class="fa fa-skyatlas" aria-hidden="true"></i> Cloud Files</a>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+                </li>
+                <li>
+                    {% if 'username' in request.session %}
+                    <!-- Logout --> 
+                      <form action="{% url 'administrator:viewlogout' %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-block btn-danger text-right mt-2 text-center">LOGOUT <i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                      </form>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+
+        <!--// LATERAL NAV-BAR -->
+
+        <!-- Page Content Holder -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link {% active 'main' %}" href="/main">Home <span class="sr-only"></span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% active 'blog' %}" href="/blog">Blog <span class="sr-only"></span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% active 'aboutme' %}" href="/aboutme">About Me <span class="sr-only"></span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% active 'cv' %}" href="/cv">CV <span class="sr-only"></span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% active 'skills' %}" href="/skills">Skills <span class="sr-only"></span></a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link {% active 'files' %}" href="/files">Cloud Files <span class="sr-only"></span></a>
+                            </li>
+
+                            <!-- Logout --> 
+                            <li class="nav-item mt-2 ml-3">
+                              {% if 'username' in request.session %}
+                                    <a href="logout" class="mt-2"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                              {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
       
-        <!-- New Post -->
-        <div class="col-12 m-2">
-          <form action="{% url 'administrator:blognew' %}" method="post">
-            {% csrf_token %}
-            <button class="btn btn-success btn-block">NEW POST</button>
-          </form>
+            <div class="container-fluid text-center">
+              <div class="container">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <h1>LIST POSTS</h1>
+                  </div>
+                </div>
+              </div>
+              
+                <!-- New Post -->
+                <div class="col-12 m-2">
+                  <form action="{% url 'administrator:blognew' %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-success btn-block"><i class="fa fa-plus" aria-hidden="true"></i> NEW POST </button>
+                  </form>
+                </div>
+              </div>
+            
+              <!-- TABLE RESPONSIVE -->
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Section</th>
+                      <th scope="col">Author</th>
+                      <th scope="col">Tags</th>
+                      <th scope="col">Date</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  
+                      {% for post in posts%}
+                        <tr>
+                          <th scope="row">{{post.idpost}}</th>
+                          <td>{{post.title}}</td>
+                          <td>{{post.section}}</td>
+                          <td>{{post.author}}</td>
+                          <td>{{post.tags|replace}}</td>
+                          <td>{{post.date}}</td>
+                          <td><a href="{% url 'administrator:blogedit' post.idpost %}"><button class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a></td>
+                          <td><a href="{% url 'administrator:blogremove' post.idpost %}"><button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a></td>
+                        </tr>
+                      
+                      {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
         </div>
-      </div>
-
-      <!-- TABLE RESPONSIVE -->
-      <div class="table-responsive">
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Section</th>
-              <th scope="col">Author</th>
-              <th scope="col">Tags</th>
-              <th scope="col">Date</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-
-              {% for post in posts%}
-                <tr>
-                  <th scope="row">{{post.idpost}}</th>
-                  <td>{{post.title}}</td>
-                  <td>{{post.section}}</td>
-                  <td>{{post.author}}</td>
-                  <td>{{post.tags|replace}}</td>
-                  <td>{{post.date}}</td>
-                  <td><a href="{% url 'administrator:blogedit' post.idpost %}"><button class="btn btn-warning">Edit Post</button></a></td>
-                  <td><a href="{% url 'administrator:blogremove' post.idpost %}"><button class="btn btn-danger">Remove</button></a></td>
-                </tr>
-
-              {% endfor %}
-          </tbody>
-        </table>
-      </div>
     </div>
       
       <!--// TABLE RESPONSIVE -->
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script src="{% static 'administrator/js/jquery.growl.js' %}"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+          $('#sidebarCollapse').on('click', function () {
+              $('#sidebar').toggleClass('active');
+              $(this).toggleClass('active');
+          });
+      });
+    </script>
+    
+    {% if loginfail is False %}
+    <script>
+      $(document).ready (function(){
+        $.growl.notice({ title: "Login Successful", message: "Welcome Administrator!", location:'br' });
+      });
+    </script>
+    {% endif %}
+  
   </body>
 </html>

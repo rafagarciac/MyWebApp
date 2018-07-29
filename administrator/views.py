@@ -38,11 +38,11 @@ def viewlogin(request):
         request.session['password'] = password
         # Redirect to a success page.
         all_posts = get_list_or_404(Post.objects.all())
-        context = {'posts': all_posts}
+        context = {'posts': all_posts, 'loginfail': False}
         return render(request, 'administrator/blog.html', context=context, content_type=None, status=None, using=None)
     else:
         # Return an 'invalid login' error message.
-        return render(request, 'administrator/loginindex.html', context=None, content_type=None, status=None, using=None)
+        return render(request, 'administrator/loginindex.html', context={'loginfail': True}, content_type=None, status=None, using=None)
 
 
 def blogedit (request, idpost):
