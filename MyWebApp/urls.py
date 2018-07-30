@@ -24,7 +24,8 @@ handler404 = 'blog.views.error_404_view'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', include('main.urls')),
-    path('blog/', include('blog.urls')),
+    path('blog/', include('blog.urls')),    
+    path('aboutme/', include('aboutme.urls')),
     path('administrator/', include('administrator.urls')),
 ]
 

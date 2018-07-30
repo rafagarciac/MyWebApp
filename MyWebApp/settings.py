@@ -32,8 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
-    'blog.templatetags',
+    'aboutme.apps.AboutmeConfig',
     'administrator.apps.AdministratorConfig',
+    'blog.templatetags',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
