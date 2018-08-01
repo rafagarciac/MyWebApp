@@ -9,9 +9,11 @@ urlpatterns = [
     # /blog/
     url(r'^$', views.loginindex, name='loginindex'),
     url(r'blog', views.viewlogin, name='viewlogin'),
+    url(r'aboutme', views.aboutme, name='aboutme'),
     url(r'logout', views.viewlogout, name='viewlogout'),
     url(r'^remove/(?P<idpost>[0-9]+)', views.blogremove, name='blogremove'),
     url(r'add', views.blognew, name='blognew'),
     url(r'^edit/(?P<idpost>[0-9]+)', views.blogedit, name='blogedit'),
-    url(r'^(?P<idpost>[0-9]+)', views.save, name='save'),
+    url(r'^savepost/(?P<idpost>[0-9]+)', views.savepost, name='savepost'),
+    url(r'^saveme/(?P<id>[0-9]+)', views.saveaboutme, name='saveaboutme'),
 ]

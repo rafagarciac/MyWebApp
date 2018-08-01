@@ -12,6 +12,17 @@ def replace(value):
     value = value.replace("','", '|')
     return value.replace("'", '').title()
 
+    
+@register.filter
+@stringfilter
+def replaceTagsAboutme(value):
+    formaTags = ""
+    value = value.replace("'", '')
+    value = value.split(",")
+    for tag in value:
+        formaTags += " #" + tag
+    return formaTags.title()
+
 # Limit the Post Description --> Contenttext in the DB
 @register.filter
 @stringfilter

@@ -72,7 +72,7 @@
 
     <div class="container-fluid mt-3">
         <div class="container">
-            <form action="{% url 'administrator:save' Post.idpost %}" method="post">
+            <form action="{% url 'administrator:savepost' Post.idpost %}" method="post">
                 <div class="form-group">
                     {% csrf_token %}
 

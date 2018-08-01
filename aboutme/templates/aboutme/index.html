@@ -17,10 +17,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- FontAwesome v5.1.0 -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/fonts.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
   </head>
   <body>
 
@@ -64,43 +66,43 @@
     <div class="container-fluid no-gutters m-0 p-0">
         <div class="row no-gutters m-0 p-0">
             <div class="col-12 col-md-6 col-xl-7">
-                <img src='https://placehold.it/1150x900?text=Image%20Proflile' class="img-fluid" alt='Image Profile'/>
+                <!--<img src='https://placehold.it/1150x900?text=Image%20Proflile' class="img-fluid" alt='Image Profile'/-->
+                <img src="{% static 'aboutme/images/profile_image_men.jpg' %}"  class="img-fluid" alt='Image Profile'>
             </div>
             <div class="col-12 col-md-6 col-xl-5">
-                <div class="jumbotron bg-white ml-5">
-                    <h1>Rafael García Cuéllar</h1>
-                    <h4>Software Developer in Golden Soft</h4>
-                    <h5 class="text-muted mb-2">Alcalá de Henares, Madrid, Spain</h5>
+                <div class="jumbotron bg-white ml-5 pt-4 pb-0">
+                    <h1>{{ Me.name }}</h1>
+                    <h4>{{ Me.title }}</h4>
+                    <h5 class="text-muted mb-2">{{ Me.location }}</h5>
 
-                    <button type="button" class="btn btn-secondary outline mb-5"><i class="fa fa-bars" aria-hidden="true"></i> Read my blog</button>
+                    <button type="button" class="btn btn-secondary outline mb-5"><a href="/blog" class="text-white"><i class="fa fa-bars" aria-hidden="true"></i> Read my blog</a></button>
 
                     <p class="text-justify">
-                        ✔️ Microsoft Technologies: C#, Visual Basic, .NET framework Technologies, Razor, ASP, SQL Server, IIS & Web Service. <br>
-                        ✔️ Back-End: Java, JavaEE, Spring, Servlet, JSP, Hibernate ORM, Scripting, Python, DJango.<br>
-                        ✔️ Front-End: JavaScript, AngularJS, JQuery, Bootstrap, Sass, HTML5, CSS3...<br>
-                        ✔️ Version Control: Git, GitHub, Jenkins, TortoiseSVN, OpenSource...<br>
-                        ✔️ Database: Oracle, MySQL, PostgreSQL, SQLite, MongoDB, DB2, Microsoft Access, SQL, PL/SQL, MariaDB. <br>
-                        ✔️ Other Technologies: Firebase, Android, Multithread Programming, TCP/IP, 
-                        UDP, RestFul APIs, MVC, XML/JSON, REST/SOAP, Amazon. <br>
-                        ✔️ Mobile Technologies: Android, IOS, Java, Kotlin, Object-C, Swift, Ionic, 
-                        React Native, Xamarin. 
+                        {% autoescape off %}{{ Me.bio }}{% endautoescape %}
                     </p>
 
-                    <p id="tags" class="text-muted font-weight-light"> #career  #leadership  #travel  #shopping  #writing</p>
+                    <p id="tags" class="text-muted font-weight-light"> {{ Me.tags | replaceTagsAboutme }}</p>
 
-                    <div class="row no-gutters m-0 p-0">
-
+                    <div class="row no-gutters m-0">
                         <div class="col-12 col-md-6">
                             <p class="font-weight-bold">WORK <br>
-                            <font class="font-weight-normal text-muted"> Software Developer </font></p>
+                            <font class="font-weight-normal text-muted"> {{ Me.work }} </font></p>
                         </div>
                         <div class="col-12 col-md-6">
                             <p class="font-weight-bold">EDUCATION <br>
-                            <font class="font-weight-normal text-muted"> I.E.S Alonso de Avellaneda </font></p>
+                            <font class="font-weight-normal text-muted"> {{ Me.education }} </font></p>
                         </div>
-
                     </div>
 
+                    <!-- Share Social Networks -->
+                    <div class="row mt-1 p-0">
+                        <div class="col-12 d-flex justify-content-around">
+                            <a class="circle-button" href="{{ Me.twitter_url }}" target="_blank" style="background-color: #55acee"><i class="fa fa-twitter icon-circle-t"></i></a>       
+                            <a class="circle-button" href="{{ Me.linkedin_url }}" target="_blank" style="background-color: #0077B5"><i class="fa fa-linkedin icon-circle-t"></i></a>         
+                            <a class="circle-button" href="mailto:{{ Me.email }}" target="_blank" style="background-color: #131418"><i class="fa fa-envelope icon-circle-em"></i></a>
+                            <a class="circle-button" href="{{ Me.github_url }}" target="_blank" style="background-color: #333"><i class="fa fa-github icon-circle-t" aria-hidden="true"></i></a>       
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,5 +116,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+    <script src="{% static 'main/js/init.js' %}"></script>
+    <script src="{% static 'blog/js/share-action-buttons.js' %}"></script>
+    </body>
 </html>

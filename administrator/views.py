@@ -5,8 +5,9 @@ from django.shortcuts import render
 import time
 #Import Posts from blog Application for add, edit & remove Posts 
 from blog.models import Post
+from aboutme.models import Me
 
-# Create your views here.
+##########################################  B L O G    S E C T I O N #####################################
 def loginindex (request):
     if 'username' not in request.session:
         return render(request, 'administrator/loginindex.html', context=None, content_type=None, status=None, using=None)
@@ -61,9 +62,9 @@ def blogedit (request, idpost):
     else:
         return render(request, 'administrator/blogdetailedit.html', context={'Post': post}, content_type=None, status=None, using=None)
 
-def save (request, idpost):
+def savepost (request, idpost):
     try:
-        post = Post.objects.get(pk=request.POST['idpost'])
+        post = Post.objects.get(pk=idpost)
     except (KeyError, Post.DoesNotExist):
         return render( request, 'administrator/blog.html', {
             'Post': post,
@@ -108,5 +109,35 @@ def blognew (request):
     post.tags = ''
     post.save()
     return render(request, 'administrator/blogdetailedit.html', context={'Post': post}, content_type=None, status=None, using=None)
-    
+
+##########################################  A B O U T   M E    S E C T I O N #####################################
+def aboutme(request):
+    me = get_object_or_404(Me, pk = 1)
+    context = {'Me': me}
+    return render(request, 'administrator/aboutme.html', context=context, content_type=None, status=None, using=None)
+
+def saveaboutme(request, id):
+    print("LOL2")
+    try:
+        me = Me.objects.get(pk=id)
+    except (KeyError, Me.DoesNotExist):
+        return render( request, 'administrator/aboutme.html', {
+            'Post': me,
+            'error_message': "You didn't save a Valid AboutMe",
+            })
+    else:
+        me.name = request.POST['name']
+        me.title = request.POST['title']
+        me.location = request.POST['location']
+        me.bio = request.POST['bio']
+        me.tags = request.POST['tags']
+        me.work = request.POST['work']
+        me.education = request.POST['education']
+        me.twitter_url = request.POST['twitter_url']    
+        me.linkedin_url = request.POST['linkedin_url']  
+        me.github_url = request.POST['github_url']  
+        me.email = request.POST['email']
+        me.save()
+        context = {'Me': me}
+        return render(request, 'administrator/aboutme.html', context=context, content_type=None, status=None, using=None)
         
