@@ -76,6 +76,7 @@ def savepost (request, idpost):
         post.textcontent = request.POST['textcontent']
         post.tags = request.POST['tags']
         post.section = request.POST['section']
+        post.author = request.POST['author']
         if request.POST['date'] == "" or request.POST['date'] is None:
             #Current Date   Format: yyyy-mm-dd
             post.date = time.strftime("%Y-%m-%d")

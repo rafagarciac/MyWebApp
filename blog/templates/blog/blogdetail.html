@@ -1,4 +1,5 @@
 {% load static %}
+{% load filters %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -102,7 +103,11 @@
             <div id="content" class="p-4 mt-2 mb-4">            
                 {% autoescape off %}{{ Post.content }}{% endautoescape %}
             </div>
-          
+
+             <!-- Tags -->
+             <div class="mt-2 mb-4">
+                 <p class="text-muted">{{ Post.tags | replaceTagsAboutme }} </p>
+             </div>
 
     <!-- DISQUS Third Party-->
             <div id="disqus_thread"></div>
