@@ -11,6 +11,9 @@
     <!-- Icons - Favicon -->
     <link rel="shortcut icon" href="{% static 'admin/img/favicon.ico' %}" />
     <link rel="icon" href="{% static 'admin/img/favicon.ico' %}" type="image/x-icon" />
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="/web/tweet-button">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -23,6 +26,15 @@
 
   </head>
   <body>
+
+    <!-- Sticky Social Bar -->
+    <div class="icon-bar">
+        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a> 
+        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a> 
+        <a href="#" class="google"><i class="fa fa-google"></i></a> 
+        <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+        <a href="#" class="youtube"><i class="fa fa-youtube"></i></a> 
+    </div>
 
     <!-- NAV BAR --> 
     <nav class="navbar navbar-dark bg-dark sticky-top navbar-expand-sm text-center">
@@ -79,12 +91,13 @@
                 </div>
             </div>
 
+
             <!-- Share Social Networks -->
             <div class="row mt-3 mb-3">
                 <div class="col-12 d-flex justify-content-around">
                         <a class="circle-button" href="javascript:fbShare('{{ Post.title }}', 'Fb Share', 'Facebook share popup', '{{ Post.title }}', 520, 350)" style="background-color: #3b5999"><i class="fa fa-facebook-f icon-circle-f"></i></a>
-                        <a class="circle-button" href="https://twitter.com/" style="background-color: #55acee"><i class="fa fa-twitter icon-circle-t"></i></a>       
-                        <a class="circle-button" href="https://www.linkedin.com/" style="background-color: #0077B5"><i class="fa fa-linkedin icon-circle-t"></i></a>       
+                        <a class="circle-button" href="https://twitter.com/intent/tweet?text={{ Post.title }}" target="_blank" style="background-color: #55acee"><i class="fa fa-twitter icon-circle-t"></i></a>       
+                        <a class="circle-button" href="https://www.linkedin.com/shareArticle?mini=true&url=http://developer.linkedin.com&title={{ Post.title }}&summary={{ Post.title }}" style="background-color: #0077B5"><i class="fa fa-linkedin icon-circle-t"></i></a>       
                         <a class="circle-button" href="https://www.instagram.com/" style="background-color: #e4405f"><i class="fa fa-instagram icon-circle-t"></i></a>       
                         <a class="circle-button" href="mailto:r.gc@hotmail.es?subject={{Post.title}}?body={{Post.textcontent}}" style="background-color: #131418"><i class="fa fa-envelope icon-circle-em"></i></a>       
                         <!--    <svg width="200px" height="200px" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">

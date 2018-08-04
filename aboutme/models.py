@@ -2,7 +2,7 @@ from django.db import models
 import os
 
 def get_image_path(instance, filename):
-    return os.path.join(str(instance.idpost), filename)
+    return os.path.join(filename)
 
 # Create your models here.
 class Me(models.Model):

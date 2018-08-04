@@ -94,6 +94,12 @@
                     {# Implement & Apply https://www.froala.com/wysiwyg-editor HTML Edito Framework#}
                     <!-- Create a tag that we will use as the editable area. -->
                     <!-- You can use a div tag as well. -->
+
+                    <label for="image">Image</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="image" id="fileImage" accept="image/*">
+                        <label class="custom-file-label" id="labelImage" for="customFile">Choose image...</label>
+                    </div><br><br>
                     
                     <label for="content">Content</label>
                     <div id="froala_editor">{% autoescape off %}{{ Post.content }}{% endautoescape %}</div>
@@ -177,7 +183,7 @@
     <script>
         $(function() { 
         $('#froala_editor').froalaEditor() 
-        //$('#froala_editor').froalaEditor('html.set', '{{Post.content}}');
+        //$('#froala_editor').froalaEditor('html.set', '{#Post.content#}');
         
             // When do the Submit of EditForm, Assign the html.get of FroalaEditor to Hidden input with id=content  
             $("form").submit(function( event ) {
@@ -212,5 +218,13 @@
         });
 
     </script>
+
+    <script>
+        $('.custom-file-input').on('change',function(){
+            var fileName = $(this).val().replace('C:\\fakepath\\', '');
+            $('#labelImage').text(fileName);
+            $('#fileImage').val(fileName);
+        });
+        </script>
   </body>
 </html>

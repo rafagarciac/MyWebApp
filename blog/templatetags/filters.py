@@ -23,6 +23,11 @@ def replaceTagsAboutme(value):
         formaTags += " #" + tag
     return formaTags.title()
 
+@register.filter
+@stringfilter
+def formatStatic(value):
+    return '/static/media_images/' + value
+
 # Limit the Post Description --> Contenttext in the DB
 @register.filter
 @stringfilter

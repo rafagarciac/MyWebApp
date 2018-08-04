@@ -111,10 +111,13 @@
         <!-- Page Content Holder -->
         <div id="content">
 
-            <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light text-center text-md-right">
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="navbar-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </button>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -246,6 +249,16 @@
     <script type="text/javascript" src="{% static 'blog/vendor/jQuery-tagEditor/jquery.caret.min.js' %}"></script>
     
     <script src="{% static 'main/js/init.js' %}"></script>
+
+    <!-- Lateral Menu Action -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
 
     <!-- Initialize the editor. -->
     <script>

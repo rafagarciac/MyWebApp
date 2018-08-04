@@ -1,0 +1,17 @@
+/*---------------------------------------------------------------------*/
+/*-----------------------------   LINK HREF #   -----------------------*/
+/*---------------------------------------------------------------------*/
+
+.link-ref > a {
+    visibility: hidden;
+    opacity:0;
+    -webkit-transition: visibility 0.3s linear,opacity 0.3s linear;   /*Safari*/
+    -moz-transition: visibility 0.3s linear,opacity 0.3s linear;      /*MozillaFirefox*/
+    -o-transition: visibility 0.3s linear,opacity 0.3s linear;        /*Opera*/
+    transition: visibility 0.3s linear,opacity 0.3s linear;           /*Chrome & Others*/
+}
+
+.link-ref:hover a  {
+    visibility: visible;
+    opacity:1;
+}

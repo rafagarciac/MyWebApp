@@ -70,7 +70,7 @@
             <a href="{% url 'blog:blogdetail' post.idpost %}">
                 <div class="row shadowbox mb-5">
                     <div class="col-3 p-0">
-                        <img src="{{ post.image }}" alt="" class="img-fluid"/>
+                        <img src="{{ post.image | formatStatic }}" alt="" class="img-fluid"/>
                     </div>
                     <div class="col-9">
                         <!--Title -->
