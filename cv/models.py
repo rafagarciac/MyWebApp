@@ -2,6 +2,11 @@ from django.db import models
 from datetime import date
 
 # Create your models here.
+
+class Mycv(models.Model):
+    DEFAULT_ID_CV = 1
+    pass
+
 class Experience(models.Model):
     position = models.CharField(max_length=200, blank=True, default="Software Developer")
     company = models.CharField(max_length=200, blank=True, default="Google")
@@ -9,6 +14,7 @@ class Experience(models.Model):
     startdate = models.DateField(auto_now=False, auto_now_add=False, blank=True, default=date.today)
     finaldate = models.DateField(auto_now=False, auto_now_add=True, blank=False, null=True)
     description = models.TextField(blank=False, default="My Job description")
+    cv_experience = models.ForeignKey(Mycv, on_delete=models.CASCADE, default=Mycv.DEFAULT_ID_CV)
 
     def __str__(self):
         return self.position + " .- " + self.company + " -. " + self.location + " (" + self.startdate.__str__() + " - " + self.finaldate.__str__() + ")"
@@ -22,10 +28,34 @@ class Education(models.Model):
     startdate = models.DateField(auto_now=False, auto_now_add=False, blank=True, default=date.today)
     finaldate = models.DateField(auto_now=False, auto_now_add=True, blank=False, null=True)
     activities = models.TextField(max_length=200, blank=False, default="Football Team & Choir") 
+    cv_education = models.ForeignKey(Mycv, on_delete=models.CASCADE, default=Mycv.DEFAULT_ID_CV)
 
     def __str__(self):
         return self.university + " - " + self.certification + " .- (" + self.mark.__str__() + ") -. " + self.academic_discipline + " (" + self.startdate.__str__() + " - " + self.finaldate.__str__() + ")"
 
+# FOREIGN KEY TEST
+# ------------------
+#### Cv Create
+# cv = Mycv()
+# cv.save()
+
+#### 2 experiences created
+# exp = Experience()
+# exp.save()  # By default this assign to Mycv with id = 1 (The first one)
+# exp2 = Experience()
+# exp2
+
+#### Show all Experiences
+# Experience.objects.all()
+
+#### Show the Cv associated experiences
+# cv.experience_set.all() 
+# <QuerySet [<Experience: Software Developer .- Google -. Madrid, Spain (2018-08-07 - 2018-08-07)>, <Experience: Software Developer .- Google -. Madrid, Spain (2018-08-07 - 2018-08-07)>]>
+
+#### Cv Deleted output (Cascade)
+# cv.delete()
+# (3, {'cv.Experience': 1, 'cv.Education': 1, 'cv.Mycv': 1})
+# ------------------
 
 # List of Methods Models
 # 1. __str__()
