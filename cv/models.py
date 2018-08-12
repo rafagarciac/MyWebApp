@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+from django.urls import reverse
 
 # Create your models here.
 
@@ -15,6 +16,9 @@ class Experience(models.Model):
     finaldate = models.DateField(auto_now=False, auto_now_add=True, blank=False, null=True)
     description = models.TextField(blank=False, default="My Job description")
     cv_experience = models.ForeignKey(Mycv, on_delete=models.CASCADE, default=Mycv.DEFAULT_ID_CV)
+
+    def get_absolute_url(self):
+        return reverse('cv:experience_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.position + " .- " + self.company + " -. " + self.location + " (" + self.startdate.__str__() + " - " + self.finaldate.__str__() + ")"

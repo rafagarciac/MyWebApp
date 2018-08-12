@@ -1,0 +1,18 @@
+.row-style {
+    background-color: rgba(205, 209, 212, 0.247);
+    border: 1px solid black;
+    /*http://border-radius.com/*/
+    border-radius: 5px;
+    border-top-right-radius: 100px;
+    /*https://www.cssmatic.com/es/box-shadow*/
+    -webkit-box-shadow: 0px 0px 30px -5px rgba(128,123,128,0.79);
+    -moz-box-shadow: 0px 0px 30px -5px rgba(128,123,128,0.79);
+    box-shadow: 0px 0px 30px -5px rgba(128,123,128,0.79);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.row-style:hover {
+    -webkit-box-shadow: 0px 0px 0px 0px rgba(128,123,128,0.79);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(128,123,128,0.79);
+    box-shadow: 0px 0px 0px 0px rgba(128,123,128,0.79);
+}

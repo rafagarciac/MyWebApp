@@ -1,1 +1,64 @@
-<h1>CV</h1>
+{% extends "cv/base.html" %}
+
+{% block body %}
+    <div class="container-fluid mt-4">
+        <div class="container">
+    <!-- Experience's List -->
+    {% if experiences_list %}
+        <h2 class="pt-3 pb-4 text-center" >Experiences - <a href="{% url 'cv:experience_create' %}">Add Experience +</a> </h2>
+        {% for experience in experiences_list  %}  
+        <a href="{% url 'cv:experience_detail' experience.pk %}">
+            <div class="row p-3 mb-3 row-style">
+                <div class="col-3">
+                    <img src='https://dummyimage.com/200x200.jpg' class="img-fluid"/>
+                </div>
+                <div class="col-9">
+                    <h4>{{ experience.position }}</h4>
+                    <h5>{{ experience.company }}</h5>
+                    <p class="text-muted">{{ experience.startdate }} &nbsp;&nbsp;-&nbsp;&nbsp; {{ experience.finaldate }} </p>
+                    <p class="text-muted">{{ experience.location }}</p>
+                    <p class="text-muted">{{ experience.description }}</p>
+                </div>
+            </div>
+        </a>
+        {% empty %}
+            <p>No Experience available...</p>
+        {% endfor %}
+
+    {% else %}
+
+        <p>No Experiences available...</p>
+
+    {% endif %}
+    <!--// Experience's List -->
+
+    <!-- Education's List -->
+    {% if educations_list %}
+        <h2 class="pt-3 pb-4 text-center">Education</h2>
+        {% for education in educations_list %}
+        <a href="{% url 'cv:education_detail' education.pk %}">
+            <div class="row p-3 mb-3 row-style">
+                <div class="col-3">
+                    <img src='https://dummyimage.com/200x200.jpg' class="img-fluid"/>
+                </div>
+                <div class="col-9">
+                    <h4>{{ education.university }} {% if education.academic_discipline %}&#187; {{ education.academic_discipline }}{% endif %}</h4>
+                    <h5>{{ education.certification }}</h5>
+                    <p class="text-muted">{{ education.startdate.year }} &nbsp;-&nbsp; {{ education.finaldate.year }} </p>
+                    <p class="text-muted">{{ education.location }}</p>
+                    <p class="text-muted">{{ education.description }}</p>
+                </div>
+            </div>
+        </a>
+        {% empty %}
+            <p>No education available...</p>
+        {% endfor %}
+
+    {% else %}
+        <p>No Educations available...</p>
+    {% endif %}
+    <!--// Education's List -->
+        </div>
+    </div>
+
+{% endblock  %}

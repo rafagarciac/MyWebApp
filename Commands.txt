@@ -49,3 +49,13 @@ exit()
 ## Reset the Id AUTOINCREMENT in the Table
 UPDATE SQLITE_SEQUENCE SET seq = n WHERE name = 'blog_post'
 # Note: [n = n + 1], I mean If you want to reset the Id to 4, you'll have to put  n = 3 (n = 3 + 1 = 4)
+
+##########################################################################################
+###########################  ##########  D E B U G ########## ############################
+##########################################################################################
+# https://stackoverflow.com/questions/1118183/how-to-debug-in-django-the-good-way
+
+## There are a bunch of ways to do it, but the most straightforward is to simply use the Python debugger. 
+## Just add following line in to a Django view function:
+
+import pdb; pdb.set_trace()
