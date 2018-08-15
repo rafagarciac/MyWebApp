@@ -1,7 +1,7 @@
 {% extends "cv/base.html" %}
 
 {% block body %}
-    <div class="container">
+    <div class="container col-12 col-md-6 mt-4 justify-content-center">
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% include "cv/form_template_experience.html" %}

@@ -1,240 +1,91 @@
-<!doctype html>
+{% extends "administrator/base.html" %}
 {% load static %}
 {% load filters %}
-<html>
-  <head>
-    <title>Administrator - AboutMe</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block title %}Administrator - AboutMe{% endblock %}
+{% block title_header %}ABOUT ME VARIABLES{% endblock  %}
 
-    <!-- Icons - Favicon -->
-    <link rel="shortcut icon" href="{% static 'admin/img/favicon.ico' %}" />
-    <link rel="icon" href="{% static 'admin/img/favicon.ico' %}" type="image/x-icon" />
-
+{% block css_links %}
     <!-- Froala Editor Dependencies -->
     <!-- Include external CSS. -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
- 
+
     <!-- Include Editor style. -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/css/froala_style.min.css" rel="stylesheet" type="text/css" />
-
     <!-- Tags Editor - https://goodies.pixabay.com/jquery/tag-editor/demo.html -->
     <link rel="stylesheet" type="text/css" href="{% static 'blog/vendor/jQuery-tagEditor/jquery.tag-editor.css' %}" />
+{% endblock  %}
+
+{% block content %} 
     
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-
-
-    <!-- My Links References -->
-    <link rel="stylesheet" type="text/css" href="{% static 'administrator/css/lateral-menu.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'administrator/css/jquery.growl.css' %}" />
-  </head>
-  <body>
-
-    <!-- LATERAL NAV-BAR -->
-    <!-- Resource https://bootstrapious.com/p/bootstrap-sidebar-->
-    
-    <div class="wrapper">
-        <!-- Sidebar Holder -->
-        <nav id="sidebar">
-            <div class="sidebar-header text-center">
-                <h3>Administrator Menu</h3>
-            </div>
-
-            <ul class="list-unstyled components">
-                <p>Menu Options</p>
-                <hr>
-                <li class="{% active 'blog' %}">
-                    <a href="/administrator/blog" aria-expanded="false"><i class="fa fa-rss" aria-hidden="true"></i> Blog</a>
-                    <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Blog</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>-->
-                </li>
-                <li class="{% active 'aboutme' %}">
-                    <a href="/administrator/aboutme"><i class="fa fa-user" aria-hidden="true" aria-expanded="false"></i> About Me</a>
-                </li>
-                <li  class="{% active 'cv' %}">
-                  <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-briefcase" aria-hidden="true"></i> CV</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li  class="{% active 'skills' %}">
-                    <a href="/administrator/skills"><i class="fa fa-code" aria-hidden="true"></i> Skills</a>
-                </li>
-                <li  class="{% active 'cloudfiles' %}">
-                    <a href="/administrator/cloudfiles"><i class="fa fa-skyatlas" aria-hidden="true"></i> Cloud Files</a>
-                </li>
-                <li  class="{% active 'parameters' %}">
-                    <a href="/administrator/parameters"><i class="fa fa-wrench" aria-hidden="true"></i> Parameters</a>
-                </li>
-            </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                </li>
-                <li>
-                    {% if 'username' in request.session %}
-                    <!-- Logout --> 
-                      <form action="{% url 'administrator:viewlogout' %}" method="post">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+              
+                <!-- ABOUT ME FORM -->
+                <form class="col-12" action="{% url 'administrator:saveaboutme' Me.id %}" method="post">
+                    <div class="form-group">
                         {% csrf_token %}
-                        <button class="btn btn-block btn-danger text-right mt-2 text-center">LOGOUT <i class="fa fa-sign-out" aria-hidden="true"></i></button>
-                      </form>
-                    {% endif %}
-                </li>
-            </ul>
-        </nav>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" name="name" value="{{ Me.name }}"></input><br><br>
 
-        <!--// LATERAL NAV-BAR -->
+                        <label for="title">Title</label>
+                        <input type="text" id="title" class="form-control" name="title" value="{{ Me.title }}"></input><br><br>
+                        <label for="location">Location</label>
+                        <input type="text" id="location" class="form-control" name="location" value="{{ Me.location }}"></input><br><br>
 
-        <!-- Page Content Holder -->
-        <div id="content">
+                        {# Implement & Apply https://www.froala.com/wysiwyg-editor HTML Edito Framework#}
+                        <!-- Create a tag that we will use as the editable area. -->
+                        <!-- You can use a div tag as well. -->
 
-            <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light text-center text-md-right">
-                <div class="container-fluid">
+                        <label for="biography">Biography</label>
+                        <div id="froala_editor">{% autoescape off %}{{ Me.bio }}{% endautoescape %}</div>
+                        <small id="fill" class="form-text text-muted"> Make your Awesome Bio!!</small><br><br>
 
-                    <button type="button" id="sidebarCollapse" class="navbar-btn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fa fa-angle-down" aria-hidden="true"></i>
-                    </button>
+                        <label for="tags">Tags</label>
+                        <textarea id="tags_textarea">
+                        </textarea><br>
+                        <label for="title">Work</label>
+                        <input type="text" id="work" class="form-control" name="work" value="{{ Me.work }}"></input><br><br>
+                        <label for="title">Education</label>
+                        <input type="text" id="education" class="form-control" name="education" value="{{ Me.education }}"></input><br><br>
+                        <label for="title">Twitter Url</label>
+                        <input type="text" id="twitter_url" class="form-control" name="twitter_url" value="{{ Me.twitter_url }}"></input>
+                        <p class="small">&nbsp;&nbsp;&nbsp;&nbsp;<u><a href="{{ Me.twitter_url }}" target="_blank">{{ Me.twitter_url }}</a></u></p><br>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link {% active 'main' %}" href="/main">Home <span class="sr-only"></span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {% active 'blog' %}" href="/blog">Blog <span class="sr-only"></span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {% active 'aboutme' %}" href="/aboutme">About Me <span class="sr-only"></span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {% active 'cv' %}" href="/cv">CV <span class="sr-only"></span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {% active 'skills' %}" href="/skills">Skills <span class="sr-only"></span></a>
-                            </li>
-                            
-                            <li class="nav-item">
-                                <a class="nav-link {% active 'files' %}" href="/files">Cloud Files <span class="sr-only"></span></a>
-                            </li>
+                        <label for="title">Linkedin Url</label>
+                        <input type="text" id="linkedin_url" class="form-control" name="linkedin_url" value="{{ Me.linkedin_url }}"></input>
+                        <p class="small">&nbsp;&nbsp;&nbsp;&nbsp;<u><a href="{{ Me.linkedin_url }}" target="_blank">{{ Me.linkedin_url }}</a></u></p><br>
 
-                            <!-- Logout --> 
-                            <li class="nav-item mt-2 ml-3">
-                              {% if 'username' in request.session %}
-                                    <a href="logout" class="mt-2"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
-                              {% endif %}
-                            </li>
-                        </ul>
+                        <label for="title">GitHub Url</label>
+                        <input type="text" id="github_url" class="form-control" name="github_url" value="{{ Me.github_url }}"></input>
+                        <p class="small">&nbsp;&nbsp;&nbsp;&nbsp;<u><a href="{{ Me.github_url }}" target="_blank">{{ Me.github_url }}</a></u></p><br>
+                        <label for="title">Email</label>
+                        <input type="text" id="email" class="form-control" name="email" value="{{ Me.email }}"></input>
+                        <p class="small">&nbsp;&nbsp;&nbsp;&nbsp;<u><a href="mailto:{{ Me.email }}">{{ Me.email }}</a></u></p><br>
+
+                        <input type="hidden" id="bio" name="bio">
+                        <input type="hidden" id="tags" name="tags">
+
+                        <button type="submit" id="save" class="btn btn-success btn-block mb-5"> Submit </button>
                     </div>
-                </div>
-            </nav>
-      
-            <div class="container-fluid">
-              <div class="container">
-                <div class="row">
-                  <div class="col-12 text-center">
-                    <h1>ABOUT ME VARIABLES</h1>
-                    <hr>
-                  </div>
-
-                  <form class="col-12" action="{% url 'administrator:saveaboutme' Me.id %}" method="post">
-                      <div class="form-group">
-                          {% csrf_token %}
-    
-                          <label for="name">Name</label>
-                          <input type="text" id="name" class="form-control" name="name", value="{{ Me.name }}"></input><br><br>
-                          
-                          <label for="title">Title</label>
-                          <input type="text" id="title" class="form-control" name="title", value="{{ Me.title }}"></input><br><br>
-
-                          <label for="location">Location</label>
-                          <input type="text" id="location" class="form-control" name="location", value="{{ Me.location }}"></input><br><br>
-        
-                          {# Implement & Apply https://www.froala.com/wysiwyg-editor HTML Edito Framework#}
-                          <!-- Create a tag that we will use as the editable area. -->
-                          <!-- You can use a div tag as well. -->
-                          
-                          <label for="biography">Biography</label>
-                          <div id="froala_editor">{% autoescape off %}{{ Me.bio }}{% endautoescape %}</div>
-                          <small id="fill" class="form-text text-muted"> Make your Awesome Bio!!</small><br><br>
-        
-                          <label for="tags">Tags</label>
-                          <textarea id="tags_textarea">
-                          </textarea><br>
-
-                          <label for="title">Work</label>
-                          <input type="text" id="work" class="form-control" name="work", value="{{ Me.work }}"></input><br><br>
-
-                          <label for="title">Education</label>
-                          <input type="text" id="education" class="form-control" name="education", value="{{ Me.education }}"></input><br><br>
-
-                          <label for="title">Twitter Url</label>
-                          <input type="text" id="twitter_url" class="form-control" name="twitter_url" value="{{ Me.twitter_url }}"></input>
-                          <p class="small">&nbsp;&nbsp;&nbsp;&nbsp;<u><a href="{{ Me.twitter_url }}" target="_blank">{{ Me.twitter_url }}</a></u></p><br>
-                          
-                          <label for="title">Linkedin Url</label>
-                          <input type="text" id="linkedin_url" class="form-control" name="linkedin_url" value="{{ Me.linkedin_url }}"></input>
-                          <p class="small">&nbsp;&nbsp;&nbsp;&nbsp;<u><a href="{{ Me.linkedin_url }}" target="_blank">{{ Me.linkedin_url }}</a></u></p><br>
-                          
-                          <label for="title">GitHub Url</label>
-                          <input type="text" id="github_url" class="form-control" name="github_url" value="{{ Me.github_url }}"></input>
-                          <p class="small">&nbsp;&nbsp;&nbsp;&nbsp;<u><a href="{{ Me.github_url }}" target="_blank">{{ Me.github_url }}</a></u></p><br>
-
-                          <label for="title">Email</label>
-                          <input type="text" id="email" class="form-control" name="email" value="{{ Me.email }}"></input>
-                          <p class="small">&nbsp;&nbsp;&nbsp;&nbsp;<u><a href="{{ Me.email }}" target="_blank">{{ Me.email }}</a></u></p><br>
-                          
-                          <input type="hidden" id="bio" name="bio">
-                          <input type="hidden" id="tags" name="tags">
-                          
-                          <button type="submit" id="save" class="btn btn-success btn-block mb-5"> Submit </button>
-                      </div>
-                  </form>
-                </div>
+                </form>
+                
+                <!--// ABOUT ME FORM -->
+                
             </div>
         </div>
     </div>
-      
-      <!--// TABLE RESPONSIVE -->
-
+{% endblock %}
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script id="dsq-count-scr" src="//rafagc.disqus.com/count.js" async></script>
 
 
-     
-
+{% block js_links %}
     <!-- Froala Editor Javascript -->
     <!-- Include Editor JS files. -->    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
@@ -243,60 +94,49 @@
     <!-- Include Editor JS files. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/js/froala_editor.pkgd.min.js"></script>
 
- 
     <!-- Tag editor JS Files -->
     <script type="text/javascript" src="{% static 'blog/vendor/jQuery-tagEditor/jquery.tag-editor.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'blog/vendor/jQuery-tagEditor/jquery.caret.min.js' %}"></script>
     
     <script src="{% static 'main/js/init.js' %}"></script>
+{% endblock  %}     
 
-    <!-- Lateral Menu Action -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $(this).toggleClass('active');
-            });
-        });
-    </script>
-
-    <!-- Initialize the editor. -->
-    <script>
-        $(function() { 
-        $('#froala_editor').froalaEditor() 
-        //$('#froala_editor').froalaEditor('html.set', '{{Post.content}}');
-        
-            // When do the Submit of EditForm, Assign the html.get of FroalaEditor to Hidden input with id=content  
-            $("form").submit(function( event ) {
-                var contentValue = $('#froala_editor').froalaEditor('html.get');
-                var tagsValue = $('#tags_textarea').tagEditor('getTags')[0].tags;
-                tagsValue = tagsValue.toString().split(',');
-
-                var tags = "" 
-                tagsValue.forEach(function(tag) {
-                     var tagModified = "'" + tag + "'";
-                     tags += tagModified + ',';
+{% block scripts %}
+        <!-- Initialize the editor. -->
+        <script>
+            $(function() { 
+            $('#froala_editor').froalaEditor() 
+            //$('#froala_editor').froalaEditor('html.set', '{{Post.content}}');
+            
+                // When do the Submit of EditForm, Assign the html.get of FroalaEditor to Hidden input with id=content  
+                $("form").submit(function( event ) {
+                    var contentValue = $('#froala_editor').froalaEditor('html.get');
+                    var tagsValue = $('#tags_textarea').tagEditor('getTags')[0].tags;
+                    tagsValue = tagsValue.toString().split(',');
+    
+                    var tags = "" 
+                    tagsValue.forEach(function(tag) {
+                         var tagModified = "'" + tag + "'";
+                         tags += tagModified + ',';
+                    });
+                    tags = tags.substr(0, tags.length - 1);
+    
+                    $('#bio').val(contentValue);
+                    $('#tags').val(tags);
+    
                 });
-                tags = tags.substr(0, tags.length - 1);
-
-                $('#bio').val(contentValue);
-                $('#tags').val(tags);
-
+            }); 
+        </script>
+        
+        <!-- Tag Editor -->
+        <script>
+            $('#tags_textarea').tagEditor({
+                clickDelete: true,
+                initialTags: [{% autoescape off %} {{ Me.tags }} {% endautoescape %}],
+                //initialTags: ['Hello', 'World'],
+                delimiter: ',', /* space and comma */
+                placeholder: 'Enter tags ...'
             });
-        }); 
-    </script>
-
-    <!-- Tag Editor -->
-    <script>
-
-        $('#tags_textarea').tagEditor({
-            clickDelete: true,
-            initialTags: [{% autoescape off %} {{ Me.tags }} {% endautoescape %}],
-            //initialTags: ['Hello', 'World'],
-            delimiter: ',', /* space and comma */
-            placeholder: 'Enter tags ...'
-        });
-
-    </script>
-  </body>
-</html>
+    
+        </script>
+{% endblock  %}
