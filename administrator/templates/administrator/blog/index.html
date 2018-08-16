@@ -7,7 +7,7 @@
 <div class="container-fluid text-center">
     <!-- NEW POST -->
     <div class="col-12 m-2">
-        <form action="{% url 'administrator:blognew' %}" method="post">
+        <form action="{% url 'administrator:blog_create' %}" method="post">
             {% csrf_token %}
             <button class="btn btn-success btn-block"><i class="fa fa-plus" aria-hidden="true"></i> NEW POST </button>
         </form>
@@ -40,8 +40,8 @@
               <td>{{post.author}}</td>
               <td>{{post.tags|replace}}</td>
               <td>{{post.date}}</td>
-              <td><a href="{% url 'administrator:blogedit' post.idpost %}" class="btn btn-warning" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-              <td><a href="{% url 'administrator:blogremove' post.idpost %}" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+              <td><a href="{% url 'administrator:blog_update' post.idpost %}" class="btn btn-warning" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+              <td><a href="{% url 'administrator:blog_delete' post.idpost %}" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
             </tr>
         
           {% endfor %}

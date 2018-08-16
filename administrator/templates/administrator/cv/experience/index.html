@@ -1,0 +1,85 @@
+{% extends "administrator/base.html" %}
+{% load static %}
+{% load filters %}
+{% block title %}Administrator - Experiences{% endblock %}
+{% block title_header %}LIST EXPERIENCES{% endblock  %}
+{% block content %}
+<div class="container-fluid text-center">
+    <!-- NEW EXPERIENCE -->
+    <div class="col-12 m-2">
+        <a href="{% url 'administrator:experience_create' %}">
+            <button class="btn btn-success btn-block"><i class="fa fa-plus" aria-hidden="true"></i> NEW EXPERIENCE </button>
+        </a>
+    </div>
+</div>
+    <!--// NEW experience -->
+
+<!-- TABLE EXPERIENCE RESPONSIVE -->
+<div class="table-responsive">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Position</th>
+          <th scope="col">Company</th>
+          <th scope="col">Location</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">CV</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if experiences %}
+            {% for experience in experiences%}
+                <tr>
+                    <th scope="row">{{experience.id}}</th>
+                    <td>{{experience.position}}</td>
+                    <td>{{experience.company}}</td>
+                    <td>{{experience.location}}</td>
+                    <td>{{experience.startdate}}</td>
+                    <td>{{experience.finaldate}}</td>
+                    <td>{{experience.cv_experience}}</td>
+                    <td><a href="{% url 'administrator:experience_update' experience.pk %}" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#expModal{{ experience.pk }}">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button></td>
+                    <!-- The Modal -->
+                    <div class="modal" id="expModal{{ experience.pk }}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Experience Delete {{ experience.pk }} </h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                              
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form action="{% url 'administrator:experience_delete' experience.pk %}" method="post">
+                                        {% csrf_token %}
+                                        <p> Do you want to delete "{{ experience.position }}" Experience ? </p>
+                                        <input type="submit" class="btn btn-success" value="Confirm">
+                                    </form>
+                                </div>
+                              
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            
+            {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+</div>
+
+
+<!--// TABLE EXPERIENCE RESPONSIVE -->
+
+{% endblock %}

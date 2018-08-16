@@ -1,0 +1,176 @@
+{% extends "administrator/base_form.html" %}
+{% load static %}
+{% block title %}Detail Blog: {{ Post.idpost }}{% endblock  %}
+{% block css_links %}
+    <!-- Froala Editor Dependencies -->
+    <!-- Include external CSS. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+ 
+    <!-- Include Editor style. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Tags Editor - https://goodies.pixabay.com/jquery/tag-editor/demo.html -->
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/vendor/jQuery-tagEditor/jquery.tag-editor.css' %}" />
+{% endblock  %}
+
+{% block my_css_links %}
+    <!-- My Links References -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/fonts.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+{% endblock  %}
+    
+{% block form_content %}
+<form action="{% url 'administrator:savepost' Post.idpost %}" method="post">
+        <div class="form-group">
+            {% csrf_token %}
+
+            <!-- Back button
+                <input action="action" onclick="window.history.go(-1); return false;" type="button" value="Back" /> -->
+
+            <label for="idpost">IdPost</label>
+            <input type="number" id="{{Post.idpost}}" class="form-control col-2" name="idpost" value="{{Post.idpost}}" readonly></input><br><br>
+
+            <label for="title">Title</label>
+            <input type="text" id="{{Post.title}}" class="form-control" name="title", value="{{Post.title}}"></input><br><br>
+            
+            <label for="section">Section</label>
+            <input type="text" id="{{Post.section}}" class="form-control" name="section", value="{{Post.section}}"></input><br><br>
+
+            <label for="author">Author</label>
+            <input type="text" id="{{Post.author}}" class="form-control" name="author", value="{{Post.author}}"></input><br><br>
+
+            {# Implement & Apply https://www.froala.com/wysiwyg-editor HTML Edito Framework#}
+            <!-- Create a tag that we will use as the editable area. -->
+            <!-- You can use a div tag as well. -->
+
+            <label for="image">Image</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" name="image" id="fileImage" accept="image/*">
+                <label class="custom-file-label" id="labelImage" for="customFile">Choose image...</label>
+            </div><br><br>
+            
+            <label for="content">Content</label>
+            <div id="froala_editor">{% autoescape off %}{{ Post.content }}{% endautoescape %}</div>
+            <small id="fill" class="form-text text-muted"> Fill it, with your make-believe!!</small><br><br>
+
+            <label for="tags">Tags</label>
+            <textarea id="tags_textarea">
+            </textarea><br>
+            
+            
+            <input type="hidden" id="content" name="content">
+            <input type="hidden" id="textcontent" name="textcontent">
+            <input type="hidden" id="tags" name="tags">
+            <!--<input type="text" id="froala_editor" name="content" value="{{Post.content}}"></input>-->
+            
+            <label for="date">Date</label>
+            <input type="date" id="date" class="form-control" name="date"></input><br><br>
+            
+            <button type="submit" id="save" class="btn btn-success btn-block mb-5"> Submit </button>
+        </div>
+    </form>
+
+
+    <!-- DISQUS Third Party-->
+    <div id="disqus_thread"></div>
+    <script>
+
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    
+    var disqus_config = function () {
+    this.page.url = '{{get_current_site}}';  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = '{{Post.idpost}}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://rafagc.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+{% endblock  %}
+
+{% block js_links %}
+    <!-- Disqus thread -->
+    <script id="dsq-count-scr" src="//rafagc.disqus.com/count.js" async></script>   
+    
+    <!-- Froala Editor Javascript -->
+    <!-- Include Editor JS files. -->    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+    <!-- Include Editor JS files. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/js/froala_editor.pkgd.min.js"></script>
+ 
+ 
+    <!-- Tag editor JS Files -->
+    <script type="text/javascript" src="{% static 'blog/vendor/jQuery-tagEditor/jquery.tag-editor.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/vendor/jQuery-tagEditor/jquery.caret.min.js' %}"></script>
+{% endblock  %}
+
+{% block my_js_links %}
+    
+    <script src="{% static 'main/js/init.js' %}"></script>
+    <script src="{% static 'blog/js/date_format.js' %}"></script>
+
+    <!-- Set input date Format - "yyyy-MM-dd" -->
+    <script>
+        $("#date").attr("value", formatDate('{{Post.date}}'));
+    </script>
+
+    <!-- Initialize the editor. -->
+    <script>
+        $(function() { 
+        $('#froala_editor').froalaEditor() 
+        //$('#froala_editor').froalaEditor('html.set', '{#Post.content#}');
+        
+            // When do the Submit of EditForm, Assign the html.get of FroalaEditor to Hidden input with id=content  
+            $("form").submit(function( event ) {
+                var contentValue = $('#froala_editor').froalaEditor('html.get');
+                var tagsValue = $('#tags_textarea').tagEditor('getTags')[0].tags;
+                tagsValue = tagsValue.toString().split(',');
+
+                var tags = "" 
+                tagsValue.forEach(function(tag) {
+                     var tagModified = "'" + tag + "'";
+                     tags += tagModified + ',';
+                });
+                tags = tags.substr(0, tags.length - 1);
+
+                $('#content').val(contentValue);
+                $('#textcontent').val(jQuery(contentValue).text());
+                $('#tags').val(tags);
+
+            });
+        }); 
+    </script>
+
+    <!-- Tag Editor -->
+    <script>
+
+        $('#tags_textarea').tagEditor({
+            clickDelete: true,
+            initialTags: [{% autoescape off %} {{ Post.tags }} {% endautoescape %}],
+            //initialTags: ['Hello', 'World'],
+            delimiter: ',', /* space and comma */
+            placeholder: 'Enter tags ...'
+        });
+
+    </script>
+
+    <script>
+        $('.custom-file-input').on('change',function(){
+            var fileName = $(this).val().replace('C:\\fakepath\\', '');
+            $('#labelImage').text(fileName);
+            $('#fileImage').val(fileName);
+        });
+    </script>
+{% endblock  %}

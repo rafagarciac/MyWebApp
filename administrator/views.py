@@ -1,27 +1,34 @@
 
 from django.shortcuts import render, get_object_or_404, get_list_or_404
+# Import generic views
+from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+# Import Forms
+from administrator.forms import ExperienceForm
+from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 import time
-#Import Posts from blog Application for add, edit & remove Posts 
+# Import Models 
 from blog.models import Post
 from aboutme.models import Me
+from cv.models import Mycv, Experience, Education
 
-##########################################  B L O G    S E C T I O N #####################################
+##########################################  L O G I N // L O G O U T   S E C T I O N #####################################
 def loginindex (request):
     if 'username' not in request.session:
-        return render(request, 'administrator/loginindex.html', context=None, content_type=None, status=None, using=None)
+        return render(request, 'administrator/login/index.html', context=None, content_type=None, status=None, using=None)
     else:
         all_posts = get_list_or_404(Post.objects.all())
         context = {'posts': all_posts}
-        return render(request, 'administrator/blog.html', context=context, content_type=None, status=None, using=None)
+        return render(request, 'administrator/blog/index.html', context=context, content_type=None, status=None, using=None)
 
 
 def viewlogout (request):
     #   Clear Session
     del request.session['username']
     del request.session['password']
-    return render(request, 'administrator/loginindex.html', context=None, content_type=None, status=None, using=None)
+    return render(request, 'administrator/login/index.html', context=None, content_type=None, status=None, using=None)
 
 
 def viewlogin(request):
@@ -40,13 +47,14 @@ def viewlogin(request):
         # Redirect to a success page.
         all_posts = get_list_or_404(Post.objects.all())
         context = {'posts': all_posts, 'loginfail': False}
-        return render(request, 'administrator/blog.html', context=context, content_type=None, status=None, using=None)
+        return render(request, 'administrator/blog/index.html', context=context, content_type=None, status=None, using=None)
     else:
         # Return an 'invalid login' error message.
-        return render(request, 'administrator/loginindex.html', context={'loginfail': True}, content_type=None, status=None, using=None)
+        return render(request, 'administrator/login/index.html', context={'loginfail': True}, content_type=None, status=None, using=None)
 
+##########################################  B L O G    S E C T I O N #####################################
 
-def blogedit (request, idpost):
+def blog_update (request, idpost):
     print("Method: " + request.method)
     print("Value: " + request.content_type)
     print("Path: " + request.path)
@@ -55,18 +63,18 @@ def blogedit (request, idpost):
     try:
         post = get_object_or_404(Post, pk = idpost)
     except (KeyError, Post.DoesNotExist):
-        return render( request, 'administrator/blogdetailedit.html', {
+        return render( request, 'administrator/blog/blog_form.html', {
             'Post': post,
             'error_message': "You didn't save a Valid Post",
             })
     else:
-        return render(request, 'administrator/blogdetailedit.html', context={'Post': post}, content_type=None, status=None, using=None)
+        return render(request, 'administrator/blog/blog_form.html', context={'Post': post}, content_type=None, status=None, using=None)
 
 def savepost (request, idpost):
     try:
         post = Post.objects.get(pk=idpost)
     except (KeyError, Post.DoesNotExist):
-        return render( request, 'administrator/blog.html', {
+        return render( request, 'administrator/blog/index.html', {
             'Post': post,
             'error_message': "You didn't save a Valid Post",
             })
@@ -86,43 +94,43 @@ def savepost (request, idpost):
         # Redirect to List of Blogs
         all_posts = get_list_or_404(Post.objects.all())
         context = {'posts': all_posts}
-        return render(request, 'administrator/blog.html', context=context, content_type=None, status=None, using=None)
+        return render(request, 'administrator/blog/index.html', context=context, content_type=None, status=None, using=None)
         #Redirect to the same Post
-        #return render(request, 'administrator/blogdetailedit.html', {'Post': post})
+        #return render(request, 'administrator/blog_form.html', {'Post': post})
 
-def blogremove (request, idpost):
+def blog_delete (request, idpost):
     try:
         post = get_object_or_404(Post, pk = idpost)
         post.delete()
     except (KeyError, Post.DoesNotExist):
-        return render( request, 'blog/blogdetail.html', {
+        return render( request, 'administrator/blog/blog_form.html', {
             'Post': post,
             'error_message': "You didn't save a Valid Post",
             })
     else:
         all_posts = get_list_or_404(Post.objects.all())
         context = {'posts': all_posts}
-        return render(request, 'administrator/blog.html', context=context, content_type=None, status=None, using=None)
+        return render(request, 'administrator/blog/index.html', context=context, content_type=None, status=None, using=None)
 
-def blognew (request):
+def blog_create (request):
     post = Post()
     post.date = time.strftime("%Y-%m-%d")
     post.tags = ''
     post.save()
-    return render(request, 'administrator/blogdetailedit.html', context={'Post': post}, content_type=None, status=None, using=None)
+    return render(request, 'administrator/blog/blog_form.html', context={'Post': post}, content_type=None, status=None, using=None)
 
 ##########################################  A B O U T   M E    S E C T I O N #####################################
 def aboutme(request):
     me = get_object_or_404(Me, pk = 1)
     context = {'Me': me}
-    return render(request, 'administrator/aboutme.html', context=context, content_type=None, status=None, using=None)
+    return render(request, 'administrator/aboutme/index.html', context=context, content_type=None, status=None, using=None)
 
 def saveaboutme(request, id):
     print("LOL2")
     try:
         me = Me.objects.get(pk=id)
     except (KeyError, Me.DoesNotExist):
-        return render( request, 'administrator/aboutme.html', {
+        return render( request, 'administrator/aboutme/index.html', {
             'Post': me,
             'error_message': "You didn't save a Valid AboutMe",
             })
@@ -140,5 +148,37 @@ def saveaboutme(request, id):
         me.email = request.POST['email']
         me.save()
         context = {'Me': me}
-        return render(request, 'administrator/aboutme.html', context=context, content_type=None, status=None, using=None)
-        
+        return render(request, 'administrator/aboutme/index.html', context=context, content_type=None, status=None, using=None)
+
+
+
+##########################################   C V // E X P E R I E N C E   S E C T I O N #####################################
+class ExperienceIndexView(generic.ListView):
+    template_name = "administrator/cv/experience/index.html"
+    context_object_name = "experiences"
+
+    def get_queryset(self):
+        # cv = Mycv.objects.get(id=Mycv.DEFAULT_ID_CV)
+        return Experience.objects.all() 
+
+class ExperienceDetailView(generic.DetailView):
+    model = Experience
+    template_name='administrator/cv/experience/detail.html'
+    context_object_name = 'experience'
+
+class ExperienceCreate(CreateView):
+    model = Experience
+    form_class = ExperienceForm
+    template_name = 'administrator/cv/experience/experience_form.html'
+
+class ExperienceUpdate(UpdateView):
+    model = Experience
+    form_class = ExperienceForm
+    template_name = 'administrator/cv/experience/experience_form.html'
+    
+class ExperienceDelete(DeleteView):
+    model = Experience
+    success_url = reverse_lazy('administrator:experience_index')
+
+def index (request):
+    return render(request, 'cv/index.html', context=None, content_type=None, status=None, using=None)

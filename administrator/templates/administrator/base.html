@@ -17,7 +17,9 @@
     {% endblock  %}
 
     <!-- Bootstrap CSS -->
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Fon Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     
@@ -48,21 +50,21 @@
                 </li>
                 <li  class="{% active 'cv' %}">
                   <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-briefcase" aria-hidden="true"></i> CV</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">
+                    <ul class="collapse list-unstyled components" id="pageSubmenu">
+                        <li class="{% active 'cv' %}">
+                            <a href="/administrator/cv">
                                 <i class="fa fa-clone" aria-hidden="true"></i>&nbsp;
                                 My Resumes
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
+                        <li class="{% active 'cv/experience' %}">
+                            <a href="/administrator/cv/experience">
                                 <i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;
                                 Experience's
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
+                        <li class="{% active 'cv/education' %}">
+                            <a href="/administrator/cv/education">
                                 <i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;
                                 Education's
                             </a>
@@ -188,6 +190,13 @@
             });
         });
     </script>
+
+    <style>
+            /* For hide the ugly black-modal-div... Apaño */
+            .modal-backdrop {
+                position: relative !important;
+            }
+    </style>
 
   
   </body>

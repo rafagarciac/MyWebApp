@@ -17,8 +17,13 @@ class Experience(models.Model):
     description = models.TextField(blank=False, default="My Job description")
     cv_experience = models.ForeignKey(Mycv, on_delete=models.CASCADE, default=Mycv.DEFAULT_ID_CV)
 
+    # After Create, Update And Delete Experience redirect to Detail Experience. 
+    # def get_absolute_url(self):
+    #     return reverse('cv:experience_detail', kwargs={'pk': self.pk})
+
     def get_absolute_url(self):
-        return reverse('cv:experience_detail', kwargs={'pk': self.pk})
+        return reverse('administrator:experience_index')
+
 
     def __str__(self):
         return self.position + " .- " + self.company + " -. " + self.location + " (" + self.startdate.__str__() + " - " + self.finaldate.__str__() + ")"
