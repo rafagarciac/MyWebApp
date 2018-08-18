@@ -25,6 +25,20 @@ def replaceTagsAboutme(value):
 
 @register.filter
 @stringfilter
+def formatFormAdminTitle(value):
+    if 'blog' in value:
+        value = value.replace('/administrator/', '')
+    elif 'cv' in value:
+        value = value.replace('/administrator/cv/', '')
+    else:
+        value = value.replace('/administrator/', '')
+
+    value = value.split("/")
+    extends = ' - ' + value[2] if value[2] != '' else ''
+    return value[1].title() + ' ' + value[0].title() + extends 
+
+@register.filter
+@stringfilter
 def formatStatic(value):
     return '/static/media_images/' + value
 

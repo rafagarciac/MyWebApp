@@ -1,29 +1,29 @@
 {% extends "administrator/base.html" %}
 {% load static %}
 {% load filters %}
-{% block title %}Administrator - Experiences{% endblock %}
-{% block title_header %}LIST EXPERIENCES{% endblock  %}
+{% block title %}Administrator - Educations{% endblock %}
+{% block title_header %}LIST EDUCATIONS{% endblock  %}
 {% block content %}
 <div class="container-fluid text-center">
-    <!-- NEW EXPERIENCE -->
+    <!-- NEW EDUCATION -->
     <div class="col-12 m-2">
-        <a href="{% url 'administrator:experience_create' %}">
-            <button class="btn btn-success btn-block"><i class="fa fa-plus" aria-hidden="true"></i> NEW EXPERIENCE </button>
+        <a href="{% url 'administrator:education_create' %}">
+            <button class="btn btn-success btn-block"><i class="fa fa-plus" aria-hidden="true"></i> NEW EDUCATION </button>
         </a>
     </div>
 </div>
-    <!--// NEW experience -->
+    <!--// NEW EDUCATION -->
 
-<!-- TABLE EXPERIENCE RESPONSIVE -->
+<!-- TABLE EDUCATION RESPONSIVE -->
 <div class="table-responsive">
     <table class="table">
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Position</th>
-          <th scope="col">Company</th>
-          <th scope="col">Location</th>
-          <th scope="col">Start Date</th>
+          <th scope="col">University</th>
+          <th scope="col">Certification</th>
+          <th scope="col">Academic Discipline</th>
+          <th scope="col">Start date</th>
           <th scope="col">End Date</th>
           <th scope="col">CV</th>
           <th scope="col">Order</th>
@@ -32,37 +32,37 @@
         </tr>
       </thead>
       <tbody>
-        {% if experiences %}
-            {% for experience in experiences%}
+        {% if educations %}
+            {% for education in educations%}
                 <tr>
-                    <th scope="row">{{experience.id}}</th>
-                    <td>{{experience.position}}</td>
-                    <td>{{experience.company}}</td>
-                    <td>{{experience.location}}</td>
-                    <td>{{experience.startdate}}</td>
-                    <td>{{experience.finaldate}}</td>
-                    <td>{{experience.cv_experience}}</td>
-                    <td>{{experience.order}}</td>
-                    <td><a href="{% url 'administrator:experience_update' experience.pk %}" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#expModal{{ experience.pk }}">
+                    <th scope="row">{{education.id}}</th>
+                    <td>{{education.university}}</td>
+                    <td>{{education.certification}}</td>
+                    <td>{{education.academic_discipline}}</td>
+                    <td>{{education.startdate}}</td>
+                    <td>{{education.finaldate}}</td>
+                    <td>{{education.cv_education}}</td>
+                    <td>{{education.order}}</td>
+                    <td><a href="{% url 'administrator:education_update' education.pk %}" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#expModal{{ education.pk }}">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button></td>
                     <!-- The Modal -->
-                    <div class="modal" id="expModal{{ experience.pk }}">
+                    <div class="modal" id="expModal{{ education.pk }}">
                         <div class="modal-dialog">
                             <div class="modal-content">
 
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                <h4 class="modal-title">Experience Delete {{ experience.pk }} </h4>
+                                <h4 class="modal-title">education Delete {{ education.pk }} </h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                               
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <form action="{% url 'administrator:experience_delete' experience.pk %}" method="post">
+                                    <form action="{% url 'administrator:education_delete' education.pk %}" method="post">
                                         {% csrf_token %}
-                                        <p> Do you want to delete "{{ experience.position }}" Experience ? </p>
+                                        <p> Do you want to delete "{{ education.certification }}" Education ? </p>
                                         <input type="submit" class="btn btn-success" value="Confirm">
                                     </form>
                                 </div>
@@ -82,6 +82,6 @@
 </div>
 
 
-<!--// TABLE EXPERIENCE RESPONSIVE -->
+<!--// TABLE education RESPONSIVE -->
 
 {% endblock %}

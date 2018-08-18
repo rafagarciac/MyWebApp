@@ -24,4 +24,8 @@ urlpatterns = [
     url(r'^cv/experience/edit/(?P<pk>[0-9]+)/$', views.ExperienceUpdate.as_view(), name='experience_update'),
     url(r'^cv/experience/(?P<pk>[0-9]+)/delete/$', views.ExperienceDelete.as_view(), name='experience_delete'),
     # /cv/education
+    url(r'^cv/education/$', views.EducationIndexView.as_view(), name='education_index'),
+    url(r'^cv/education/add/$', views.EducationCreate.as_view(), name='education_create'),
+    url(r'^cv/education/edit/(?P<pk>[0-9]+)/$', views.EducationUpdate.as_view(), name='education_update'),
+    url(r'^cv/education/(?P<pk>[0-9]+)/delete/$', views.EducationDelete.as_view(), name='education_delete'),
 ]

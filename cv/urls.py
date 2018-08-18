@@ -9,9 +9,5 @@ urlpatterns = [
     # url(r'^$', views.index, name='index'),
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^experience/(?P<pk>[0-9]+)/$', views.ExperienceDetailView.as_view(), name='experience_detail'),
-    url(r'^experience/add/$', views.ExperienceCreate.as_view(), name='experience_create'),
-    url(r'^experience/edit/(?P<pk>[0-9]+)/$', views.ExperienceUpdate.as_view(), name='experience_update'),
-    url(r'^experience/(?P<pk>[0-9]+)/delete/$', views.ExperienceDelete.as_view(), name='experience_delete'),
     url(r'^education/(?P<pk>[0-9]+)/$', views.EducationDetailView.as_view(), name='education_detail'),
-    
 ]

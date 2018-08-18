@@ -1,8 +1,11 @@
 from django.db import models
+import os
 from datetime import date
 from django.urls import reverse
 
 # Create your models here.
+def get_image_path(instance, filename):
+    return os.path.join(filename)
 
 class Mycv(models.Model):
     DEFAULT_ID_CV = 1
@@ -15,18 +18,33 @@ class Experience(models.Model):
     startdate = models.DateField(auto_now=False, auto_now_add=False, blank=True, default=date.today)
     finaldate = models.DateField(auto_now=False, auto_now_add=True, blank=False, null=True)
     description = models.TextField(blank=False, default="My Job description")
+    image = models.ImageField(upload_to=get_image_path, blank=False, null=True)
+    order = models.IntegerField(blank=True, unique=False, default=1)
     cv_experience = models.ForeignKey(Mycv, on_delete=models.CASCADE, default=Mycv.DEFAULT_ID_CV)
 
     # After Create, Update And Delete Experience redirect to Detail Experience. 
     # def get_absolute_url(self):
     #     return reverse('cv:experience_detail', kwargs={'pk': self.pk})
 
+    # Before Save Method
+    # def save(self, *args, **kwargs):
+    #     # This means that the model isn't saved to the database yet
+    #     if self._state.adding:
+    #         # Get the maximum display_id value from the database
+    #         order = self.objects.all().aggregate(largest=models.Max('order'))['largest']
+    #         if order is not None:
+    #             self.order = order + 1
+    #     super(Experience, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse('administrator:experience_index')
 
+    def GetOrderMaxValue(self):
+        return self.objects.all().aggregate(largest=models.Max('order'))['largest'] + 1
 
     def __str__(self):
         return self.position + " .- " + self.company + " -. " + self.location + " (" + self.startdate.__str__() + " - " + self.finaldate.__str__() + ")"
+
 
 class Education(models.Model):
     university = models.CharField(max_length=200, blank=True, default="Oxford University")
@@ -37,7 +55,16 @@ class Education(models.Model):
     startdate = models.DateField(auto_now=False, auto_now_add=False, blank=True, default=date.today)
     finaldate = models.DateField(auto_now=False, auto_now_add=True, blank=False, null=True)
     activities = models.TextField(max_length=200, blank=False, default="Football Team & Choir") 
+    image = models.ImageField(upload_to=get_image_path, blank=False, null=True)
+    order = models.IntegerField(blank=True, unique=False, default=1)
     cv_education = models.ForeignKey(Mycv, on_delete=models.CASCADE, default=Mycv.DEFAULT_ID_CV)
+
+    def get_absolute_url(self):
+        return reverse('administrator:education_index')
+
+    def GetOrderMaxValue(self):
+        return self.objects.all().aggregate(largest=models.Max('order'))['largest'] + 1
+
 
     def __str__(self):
         return self.university + " - " + self.certification + " .- (" + self.mark.__str__() + ") -. " + self.academic_discipline + " (" + self.startdate.__str__() + " - " + self.finaldate.__str__() + ")"

@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # Import Forms
-from administrator.forms import ExperienceForm
+from administrator.forms import ExperienceForm, EducationForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render
@@ -159,7 +159,7 @@ class ExperienceIndexView(generic.ListView):
 
     def get_queryset(self):
         # cv = Mycv.objects.get(id=Mycv.DEFAULT_ID_CV)
-        return Experience.objects.all() 
+        return Experience.objects.all().order_by('order')
 
 class ExperienceDetailView(generic.DetailView):
     model = Experience
@@ -180,5 +180,31 @@ class ExperienceDelete(DeleteView):
     model = Experience
     success_url = reverse_lazy('administrator:experience_index')
 
-def index (request):
-    return render(request, 'cv/index.html', context=None, content_type=None, status=None, using=None)
+##########################################   C V // E X P E R I E N C E   S E C T I O N #####################################
+
+class EducationIndexView(generic.ListView):
+    template_name = "administrator/cv/education/index.html"
+    context_object_name = "educations"
+
+    def get_queryset(self):
+        # cv = Mycv.objects.get(id=Mycv.DEFAULT_ID_CV)
+        return Education.objects.all().order_by('order')
+
+class EducationDetailView(generic.DetailView):
+    model = Education
+    template_name='administrator/cv/education/detail.html'
+    context_object_name = 'education'
+
+class EducationCreate(CreateView):
+    model = Education
+    form_class = EducationForm
+    template_name = 'administrator/cv/education/education_form.html'
+
+class EducationUpdate(UpdateView):
+    model = Education
+    form_class = EducationForm
+    template_name = 'administrator/cv/education/education_form.html'
+    
+class EducationDelete(DeleteView):
+    model = Education
+    success_url = reverse_lazy('administrator:education_index')

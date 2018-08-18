@@ -1,6 +1,7 @@
 {% extends "administrator/base_form.html" %}
 {% load static %}
-{% block title %}Detail Blog: {{ Post.idpost }}{% endblock  %}
+{% load filters %}
+{% block title %}{{ request.get_full_path | formatFormAdminTitle}}{% endblock  %}
 {% block css_links %}
     <!-- Froala Editor Dependencies -->
     <!-- Include external CSS. -->

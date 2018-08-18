@@ -1,16 +1,17 @@
 {% extends "cv/base.html" %}
-
+{% load filters %}
+{% block title %}Curriculum Vitae{% endblock %}
 {% block body %}
     <div class="container-fluid mt-4">
         <div class="container">
     <!-- Experience's List -->
     {% if experiences_list %}
-        <h2 class="pt-3 pb-4 text-center" >Experiences - <a href="{% url 'cv:experience_create' %}">Add Experience +</a> </h2>
+        <h2 class="pt-3 pb-4 text-center" >Experiences</h2>
         {% for experience in experiences_list  %}  
         <a href="{% url 'cv:experience_detail' experience.pk %}">
             <div class="row p-3 mb-3 row-style">
                 <div class="col-3">
-                    <img src='https://dummyimage.com/200x200.jpg' class="img-fluid"/>
+                    <img src="{{ experience.image | formatStatic }}" class="img-fluid" alt=""/>
                 </div>
                 <div class="col-9">
                     <h4>{{ experience.position }}</h4>
@@ -18,38 +19,6 @@
                     <p class="text-muted">{{ experience.startdate }} &nbsp;&nbsp;-&nbsp;&nbsp; {{ experience.finaldate }} </p>
                     <p class="text-muted">{{ experience.location }}</p>
                     <p class="text-muted">{{ experience.description }}</p>
-                    <a href="{% url 'cv:experience_update' experience.pk %}"><button class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#expModal{{ experience.pk }}">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                    </button>
-                    <!-- The Modal -->
-                    <div class="modal" id="expModal{{ experience.pk }}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                        
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                <h4 class="modal-title">Experience Delete {{ experience.pk }} </h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                        
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    <form action="{% url 'cv:experience_delete' experience.pk %}" method="post">
-                                        {% csrf_token %}
-                                        <p> Do you want to delete "{{ experience.position }}" Experience ? </p>
-                                        <input type="submit" class="btn btn-success" value="Confirm">
-                                    </form>
-                                </div>
-                        
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </a>
@@ -71,12 +40,12 @@
         <a href="{% url 'cv:education_detail' education.pk %}">
             <div class="row p-3 mb-3 row-style">
                 <div class="col-3">
-                    <img src='https://dummyimage.com/200x200.jpg' class="img-fluid"/>
+                    <img src="{{ education.image | formatStatic }}" class="img-fluid" alt=""/>
                 </div>
                 <div class="col-9">
                     <h4>{{ education.university }} {% if education.academic_discipline %}&#187; {{ education.academic_discipline }}{% endif %}</h4>
                     <h5>{{ education.certification }}</h5>
-                    <p class="text-muted">{{ education.startdate.year }} &nbsp;-&nbsp; {{ education.finaldate.year }} </p>
+                    <p class="text-muted">{{ education.startdate.month }} / {{ education.startdate.year }} &nbsp;-&nbsp; {{ education.finaldate.month }} / {{ education.finaldate.year }} </p>
                     <p class="text-muted">{{ education.location }}</p>
                     <p class="text-muted">{{ education.description }}</p>
                 </div>
