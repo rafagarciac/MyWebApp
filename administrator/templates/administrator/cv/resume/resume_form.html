@@ -1,0 +1,31 @@
+{% extends "administrator/base_form.html" %}
+{% load static %}
+{% load filters %}
+{% block title %}{{ request.get_full_path | formatFormAdminTitle }}{% endblock %}
+{% block css_links %}{% endblock  %}
+
+{% block my_css_links %}
+    <!-- My Links References -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/fonts.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}" />
+{% endblock  %}
+    
+{% block form_content %}
+    <div class="form-group">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include "./form_template_resume.html" %}
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-success btn-block mb-5">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock  %}
+
+{% block js_links %}{% endblock  %}
+
+{% block my_js_links %}
+    <script src="{% static 'main/js/init.js' %}"></script>
+{% endblock  %}

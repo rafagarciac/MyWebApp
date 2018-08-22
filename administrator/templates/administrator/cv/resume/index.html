@@ -1,0 +1,87 @@
+{% extends "administrator/base.html" %}
+{% load static %}
+{% load filters %}
+{% block title %}Administrator - My Resumes {% endblock %}
+{% block title_header %}LIST RESUMES{% endblock  %}
+
+{% block css_links %}
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/2.6.95/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
+{% endblock  %}
+
+{% block content %}
+<div class="container-fluid text-center">
+    <!-- NEW RESUME -->
+    <div class="col-12 m-2">
+        <a href="{% url 'administrator:resume_create' %}">
+            <button class="btn btn-success btn-block"><i class="fa fa-plus" aria-hidden="true"></i> NEW RESUME </button>
+        </a>
+    </div>
+</div>
+    <!--// NEW RESUME -->
+
+<!-- TABLE RESUME RESPONSIVE -->
+<div class="table-responsive">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Cv</th>
+          <th scope="col">Display</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if resumes %}
+            {% for resume in resumes %}
+                <tr>
+                    <th scope="row">{{resume.id}}</th>
+                    <td>{{ resume }}</td>
+                    {% if resume.display == True %}
+                        <td><i class="mdi mdi-eye mdi-36px"></i></td>
+                    {% else %}
+                        <td><a href="{% url 'administrator:display_change' resume.id %}"><i class="mdi mdi-eye-off mdi-36px"></i></a></td>
+                    {% endif %}
+                    <td><a href="{% url 'administrator:resume_update' resume.pk %}" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#expModal{{ resume.pk }}">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button></td>
+                    <!-- The Modal -->
+                    <div class="modal" id="expModal{{ resume.pk }}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Resume Delete {{ resume.pk }} </h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                              
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form action="{% url 'administrator:resume_delete' resume.pk %}" method="post">
+                                        {% csrf_token %}
+                                        <p> Do you want to delete "{{ resume.id }}" Resume ? </p>
+                                        <input type="submit" class="btn btn-success" value="Confirm">
+                                    </form>
+                                </div>
+                              
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            
+            {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+</div>
+
+
+<!--// TABLE RESUME RESPONSIVE -->
+
+{% endblock %}

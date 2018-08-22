@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # Import Forms
-from administrator.forms import ExperienceForm, EducationForm
+from administrator.forms import ExperienceForm, EducationForm, ResumeForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render
@@ -126,7 +126,6 @@ def aboutme(request):
     return render(request, 'administrator/aboutme/index.html', context=context, content_type=None, status=None, using=None)
 
 def saveaboutme(request, id):
-    print("LOL2")
     try:
         me = Me.objects.get(pk=id)
     except (KeyError, Me.DoesNotExist):
@@ -208,3 +207,49 @@ class EducationUpdate(UpdateView):
 class EducationDelete(DeleteView):
     model = Education
     success_url = reverse_lazy('administrator:education_index')
+
+##########################################   C V // R E S U M E   S E C T I O N #####################################
+
+class ResumeIndexView(generic.ListView):
+    template_name = "administrator/cv/resume/index.html"
+    context_object_name = "resumes"
+
+    def get_queryset(self):
+        # cv = Mycv.objects.get(id=Mycv.DEFAULT_ID_CV)
+        return Mycv.objects.all()
+
+class ResumeDetailView(generic.DetailView):
+    model = Mycv
+    template_name='administrator/cv/resume/detail.html'
+    context_object_name = 'Resume'
+
+class ResumeCreate(CreateView):
+    model = Mycv
+    form_class = ResumeForm
+    template_name = 'administrator/cv/resume/resume_form.html'
+
+class ResumeUpdate(UpdateView):
+    model = Mycv
+    form_class = ResumeForm
+    template_name = 'administrator/cv/resume/resume_form.html'
+    
+class ResumeDelete(DeleteView):
+    model = Mycv
+    success_url = reverse_lazy('administrator:resume_index')
+
+def displayChange(request, id):
+    # Update all cv to Display = False and then put the select cv to display = True !
+    for cv in Mycv.objects.all():
+        cv.display = False
+        cv.save()
+    try:
+        resume = get_object_or_404(Mycv, id = id)
+    except (KeyError, Post.DoesNotExist):
+        return render( request, 'administrator/cv/resume/index.html', {
+            'resumes':  Mycv.objects.all(),
+            'error_message': "Failes to update the ",
+            })
+    else:
+        resume.display = True
+        resume.save()
+        return render(request, 'administrator/cv/resume/index.html', context={'resumes': Mycv.objects.all()}, content_type=None, status=None, using=None)

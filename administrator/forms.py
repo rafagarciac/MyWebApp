@@ -44,3 +44,9 @@ class EducationForm(forms.ModelForm):
         model = Education
         fields= ['university', 'certification', 'academic_discipline', 'mark', 'startdate', 'description', 'activities', 'image', 'cv_education', 'order']
     
+class ResumeForm(forms.ModelForm):
+    display = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-control form-check-input'}))
+
+    class Meta:
+        model = Mycv
+        fields= ['display']

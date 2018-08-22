@@ -31,11 +31,11 @@
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="/main"><img src="{% static 'admin/img/logo.png' %}" class="w-50 " alt="Logo"></a>
+        <a class="navbar-brand col-8 col-md-3" href="/"><img src="{% static 'admin/img/logo.png' %}" class="w-50 " alt="Logo"></a>
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavId">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link {% active 'main' %}" href="/main">Home <span class="sr-only"></span></a>
+                    <a class="nav-link {% active '' %}" href="/">Home <span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {% active 'blog' %}" href="/blog">Blog <span class="sr-only"></span></a>
@@ -79,9 +79,16 @@
                         <p>{{ post.textcontent|limitext }}</p>
                         <!--Author & Date-->
                         <div class="row justify-content-around">
-                            <div class="col-3"><p><small class="text-muted"><i class="fas fa-user"></i> {{ post.author }} </small></p></div>
-                            <div class="col-3"><p><small class="text-muted"><i class="fas fa-tags"></i> {{ post.tags|replace }} </small></p></div> <!-- IT|Components|OpenSource|Software -->
-                            <div class="col-3"><p><small class="text-muted"><i class="far fa-clock"></i> {{ post.date }} </small></p></div>
+                            <div class="col-12 col-md-3 text-center text-md-left"><p><small class="text-muted"><i class="fas fa-user"></i> {{ post.author }} </small></p></div>
+                            <div class="col-12 col-md-3 text-center text-md-left">
+                                <p>
+                                    {% for tag in post.tags_as_list %}
+                                        <small class="text-muted"><i class="fas fa-tags"></i> {{ tag }} </small>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                            
+                            <div class="col-12 col-md-3 text-center text-md-left"><p><small class="text-muted"><i class="far fa-clock"></i> {{ post.date }} </small></p></div>
                         </div>
                     </div>
                 </div>

@@ -22,8 +22,8 @@ from django.urls import include, path
 handler404 = 'blog.views.error_404_view'
 
 urlpatterns = [
+    path('', include('main.urls')),
     path('admin/', admin.site.urls),
-    path('main/', include('main.urls')),
     path('blog/', include('blog.urls')),    
     path('aboutme/', include('aboutme.urls')),
     path('cv/', include('cv.urls')),

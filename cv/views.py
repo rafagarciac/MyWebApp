@@ -9,12 +9,12 @@ class IndexView(generic.ListView):
     context_object_name = "experiences_list"
 
     def get_queryset(self):
-        cv = Mycv.objects.get(id=Mycv.DEFAULT_ID_CV)
+        cv = Mycv.objects.get(display=True)
         return cv.experience_set.all().order_by('order') 
     
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        cv = Mycv.objects.get(id=Mycv.DEFAULT_ID_CV)
+        cv = Mycv.objects.get(display=True)
         context['educations_list'] = cv.education_set.all().order_by('order') 
         return context
 

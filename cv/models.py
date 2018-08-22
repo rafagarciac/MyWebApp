@@ -8,8 +8,11 @@ def get_image_path(instance, filename):
     return os.path.join(filename)
 
 class Mycv(models.Model):
+    display = models.BooleanField(blank=False, default=False)
     DEFAULT_ID_CV = 1
-    pass
+    
+    def get_absolute_url(self):
+        return reverse('administrator:resume_index')
 
 class Experience(models.Model):
     position = models.CharField(max_length=200, blank=True, default="Software Developer")

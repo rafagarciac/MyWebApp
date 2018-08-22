@@ -18,6 +18,12 @@ urlpatterns = [
     # /aboutme/
     url(r'^aboutme/$', views.aboutme, name='aboutme'),
     url(r'^saveme/(?P<id>[0-9]+)', views.saveaboutme, name='saveaboutme'),  
+    # /cv/resume
+    url(r'^cv/$', views.ResumeIndexView.as_view(), name='resume_index'),
+    url(r'^cv/resume/add/$', views.ResumeCreate.as_view(), name='resume_create'),
+    url(r'^cv/resume/edit/(?P<pk>[0-9]+)/$', views.ResumeUpdate.as_view(), name='resume_update'),
+    url(r'^cv/resume/(?P<pk>[0-9]+)/delete/$', views.ResumeDelete.as_view(), name='resume_delete'),
+    url(r'^cv/resume/display_change/(?P<id>[0-9]+)/$', views.displayChange, name='display_change'),
     # /cv/experience
     url(r'^cv/experience/$', views.ExperienceIndexView.as_view(), name='experience_index'),
     url(r'^cv/experience/add/$', views.ExperienceCreate.as_view(), name='experience_create'),
