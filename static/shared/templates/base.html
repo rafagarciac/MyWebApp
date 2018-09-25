@@ -1,0 +1,74 @@
+{% load static %}
+{% load filters %}
+<!doctype html>
+<html lang="en">
+    <head>
+      <title>{% block title %}{% endblock %}</title>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+      <!-- Icons - Favicon -->
+      <link rel="shortcut icon" href="{% static 'admin/img/favicon.ico' %}" />
+      <link rel="icon" href="{% static 'admin/img/favicon.ico' %}" type="image/x-icon" />
+    
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="{% static 'shared/css/bootstrap_4.0.min.css' %}">    
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <!-- Fonts -->
+      <link rel="stylesheet" type="text/css" href="{% static 'main/css/fonts.css' %}" />
+      
+      {% block css_links %}
+      
+      {% endblock  %}
+    
+    </head>
+
+    <body>
+
+        <!-- HEAD -->
+        <div class="container-fluid m-0 p-0">
+
+            {% block pre_nav %}
+            
+            {% endblock  %}
+
+            <!-- NAV BAR --> 
+            {% block nav_bar %}
+            
+            {% endblock  %}
+            <!--// NAV BAR -->
+
+            {% block background %}
+
+            {% endblock  %}
+        </div>
+
+        <!--// HEAD -->
+
+        <!-- CONTENT -->
+
+        {% block content %}
+
+        {% endblock %}
+
+        <!--// CONTENT -->
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="{% static 'shared/js/jquery-3.2.1.slim.min.js' %}"></script>
+        <script src="{% static 'shared/js/popper_1.12.9.min.js' %}"></script>
+        <script src="{% static 'shared/js/bootstrap_4.0.0.min.js' %}"></script>
+        <script src="{% static 'main/js/init.js' %}"></script>
+
+        {% block js_links %}
+
+        {% endblock  %}
+
+        {% block scripts %}
+
+        {% endblock  %}
+
+    </body>
+</html>

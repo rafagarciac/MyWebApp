@@ -5,13 +5,16 @@
 {% block title_header %}ABOUT ME VARIABLES{% endblock  %}
 
 {% block css_links %}
+    <!--<link rel="stylesheet" href="{% static 'shared/css/font-awesome_4.0.min.css' %}">-->
+
     <!-- Froala Editor Dependencies -->
     <!-- Include external CSS. -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+    <link rel="stylesheet" href="{% static 'shared/froala-editor/css/codemirror.min.css' %}">
 
     <!-- Include Editor style. -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{% static 'shared/froala-editor/css/froala_editor.pkgd.min.css' %}">
+    <link rel="stylesheet" href="{% static 'shared/froala-editor/css/froala_style.min.css' %}">
+
     <!-- Tags Editor - https://goodies.pixabay.com/jquery/tag-editor/demo.html -->
     <link rel="stylesheet" type="text/css" href="{% static 'blog/vendor/jQuery-tagEditor/jquery.tag-editor.css' %}" />
 {% endblock  %}
@@ -80,19 +83,20 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <!-- 
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+    -->
 
 {% block js_links %}
     <!-- Froala Editor Javascript -->
     <!-- Include Editor JS files. -->    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+    <script src="{% static 'shared/froala-editor/js/codemirror.min.js' %}"></script>
+    <script src="{% static 'shared/froala-editor/js/xml.min.js' %}"></script>
 
     <!-- Include Editor JS files. -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/js/froala_editor.pkgd.min.js"></script>
+    <script src="{% static 'shared/froala-editor/js/froala_editor.pkgd.min.js' %}"></script>
 
     <!-- Tag editor JS Files -->
     <script type="text/javascript" src="{% static 'blog/vendor/jQuery-tagEditor/jquery.tag-editor.min.js' %}"></script>

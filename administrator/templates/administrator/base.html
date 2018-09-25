@@ -17,13 +17,12 @@
     {% endblock  %}
 
     <!-- Bootstrap CSS -->
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'shared/css/bootstrap_4.1.2.min.css' %}">    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    
+
     <!-- My Links References -->
     <link rel="stylesheet" type="text/css" href="{% static 'administrator/css/lateral-menu.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'administrator/css/jquery.growl.css' %}" />
@@ -141,7 +140,7 @@
                             <!-- Logout --> 
                             <li class="nav-item mt-2 ml-3">
                               {% if 'username' in request.session %}
-                                    <a href="logout" class="mt-2"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                                    <a href="{% url 'administrator:viewlogout' %}" class="mt-2"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                               {% endif %}
                             </li>
                         </ul>
@@ -169,9 +168,15 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'shared/js/jquery-3.3.1.slim.min.js' %}"></script>
+    <script src="{% static 'shared/js/popper_1.14.3.min.js' %}"></script>
+    <script src="{% static 'shared/js/bootstrap_4.1.2.min.js' %}"></script>
+    
+    <!--
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    -->
     <script src="{% static 'administrator/js/jquery.growl.js' %}"></script>
 
     {% block js_links %}

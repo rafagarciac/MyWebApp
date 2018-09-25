@@ -1,7 +1,20 @@
-{% extends "cv/base.html" %}
+{% extends "base.html" %}
+{% load static %}
 {% load filters %}
 {% block title %}Curriculum Vitae{% endblock %}
-{% block body %}
+
+{% block css_links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'aboutme/css/aboutme.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'cv/css/cv.css' %}" />
+{% endblock %}
+
+{% block nav_bar %}
+    {% include "nav-bar-dark.html" %}
+{% endblock %}
+
+{% block content %}
     <div class="container-fluid mt-4">
         <div class="container">
     <!-- Experience's List -->

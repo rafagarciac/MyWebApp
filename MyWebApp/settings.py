@@ -62,6 +62,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'main', 'templates'),
             os.path.join(BASE_DIR, 'blog', 'templates'),
+            os.path.join(BASE_DIR, 'static', 'shared/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

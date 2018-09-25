@@ -1,5 +1,18 @@
-{% extends "cv/base.html" %}
-{% block title %}Education - {{education.academic_discipline}}{% endblock %}
-{% block body %}
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block title %}Education: {{education.academic_discipline}}{% endblock %}
+
+{% block css_links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'aboutme/css/aboutme.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'cv/css/cv.css' %}" />
+{% endblock %}
+
+{% block nav_bar %}
+    {% include "nav-bar-dark.html" %}
+{% endblock %}
+{% block content %}
     <p>{{ education.university }}</p>
 {% endblock  %}
