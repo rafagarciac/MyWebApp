@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # Import Forms
-from administrator.forms import ExperienceForm, EducationForm, ResumeForm
+from administrator.forms import ExperienceForm, EducationForm, ResumeForm, FieldForm, SkillForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render
@@ -13,6 +13,7 @@ import time
 from blog.models import Post
 from aboutme.models import Me
 from cv.models import Mycv, Experience, Education
+from skills.models import Field, Skill
 
 ##########################################  L O G I N // L O G O U T   S E C T I O N #####################################
 def loginindex (request):
@@ -179,7 +180,7 @@ class ExperienceDelete(DeleteView):
     model = Experience
     success_url = reverse_lazy('administrator:experience_index')
 
-##########################################   C V // E X P E R I E N C E   S E C T I O N #####################################
+##########################################   C V // E D U C A T I O N   S E C T I O N #####################################
 
 class EducationIndexView(generic.ListView):
     template_name = "administrator/cv/education/index.html"
@@ -253,3 +254,48 @@ def displayChange(request, id):
         resume.display = True
         resume.save()
         return render(request, 'administrator/cv/resume/index.html', context={'resumes': Mycv.objects.all()}, content_type=None, status=None, using=None)
+
+
+##########################################   S K I L L // F I E L D   S E C T I O N #####################################
+class FieldIndexView(generic.ListView):
+    template_name = "administrator/skills/field/index.html"
+    context_object_name = "fields"
+
+    def get_queryset(self):
+        return Field.objects.all()
+
+class FieldCreate(CreateView):
+    model = Field
+    form_class = FieldForm
+    template_name = 'administrator/skills/field/field_form.html'
+
+class FieldUpdate(UpdateView):
+    model = Field
+    form_class = FieldForm
+    template_name = 'administrator/skills/field/field_form.html'
+
+class FieldDelete(DeleteView):
+    model = Field
+    success_url = reverse_lazy('administrator:field_index')
+
+##########################################   S K I L L // S K I L L S   S E C T I O N #####################################
+class SkillIndexView(generic.ListView):
+    template_name = "administrator/skills/skill/index.html"
+    context_object_name = "skills"
+
+    def get_queryset(self):
+        return Skill.objects.all()
+
+class SkillCreate(CreateView):
+    model = Skill
+    form_class = SkillForm
+    template_name = 'administrator/skills/skill/skill_form.html'
+
+class SkillUpdate(UpdateView):
+    model = Skill
+    form_class = SkillForm
+    template_name = 'administrator/skills/skill/skill_form.html'
+
+class SkillDelete(DeleteView):
+    model = Skill
+    success_url = reverse_lazy('administrator:skill_index')

@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{% block title %}Skills{% endblock %}
+
+{% block css_links %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+{% endblock %}
+
+{% block nav_bar %}
+    {% include "nav-bar-dark.html" %}
+{% endblock nav_bar %}
+
+{% block content %}
+
+<!-- Carousel -->
+
+<div id="carouselExampleIndicators" class="carousel slide mt-4" data-ride="carousel" data-interval="4000">
+    <ol class="carousel-indicators">
+        {% with lengthArray=skills_list|length numImages=5 cont=0 %}
+
+            {% if lengthArray > 0 and lengthArray|imagesPerSlide:numImages <= 1 %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            {% else %}
+                {% for i in lengthArray|rangeImagesPerSlide:numImages %} 
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{i}}" {% if i == 0 %} class="active" {% endif %}></li>
+                {% endfor %}
+            {% endif %}
+    </ol>
+    <div class="carousel-inner">
+            
+            {% for skill in skills_list %}
+                {% if forloop.counter0 == 0 or forloop.counter0|remainder:numImages == 0 %}
+                    {% if forloop.counter0|remainder:numImages == 0 and forloop.counter0 != 0  %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                        <div class="container">
+                    
+                {% endif %}
+                    <img src='{{ skill.image | formatStatic }}' class="img-fluid float-left ml-5 ml-md-0" width="200px" height="200px" alt=''/>
+
+            {% endfor %}
+                </div>
+            </div>
+
+        {% endwith %}
+                    <!-- <div class="carousel-caption d-none d-md-block">
+                        <h5>Sample Text</h5>
+                        <p>...</p>
+                    </div> -->
+                    <!-- <img src='https://placehold.it/200x200' class="img-fluid float-left d-none d-sm-block" alt='' />
+                    <img src='https://placehold.it/200x200' class="img-fluid d-none d-md-block float-left" alt='' />
+                    <img src='https://placehold.it/200x200' class="img-fluid d-none d-md-block float-left" alt='' />
+                    <img src='https://placehold.it/200x200' class="img-fluid d-none d-xl-block float-left" alt='' /> -->
+                        
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<!--// Carousel -->
+
+<!-- Charts -->
+
+    <div class="container-fluid">
+        <div class="row mt-4">
+                <div class="col-12 col-md-1"></div>
+            <div class="col-12 col-md-4">
+                <canvas id="myChart" width="400" height="340"></canvas>
+            </div>
+            <div class="col-12 col-md-6">
+                <!-- Skill Technologies Bars -->
+                <h2>My Skills</h2>
+                {% for skill in skills_list %}
+                    <h5 class="text-muted">{{skill.name}}</h5>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{skill.percentage}}" aria-valuemin="0" aria-valuemax="100" style="width: {{skill.percentage}}%;background-color: {{ skill.color }}"></div>    
+                    </div>    
+                {% endfor %}
+                <!--// Skill Technologies Bars -->
+            </div>
+            <div class="col-12 col-md-1"></div>
+        </div>
+        <hr class="w-50">
+        <!-- Quote -->
+        <div class="row mt-5 mb-5">
+            <div class="container">
+                <blockquote class="blockquote">
+                    <p class="mb-0">Say what you mean & mean what you say.</p>
+                    <footer class="blockquote-footer">Robert C. Martin<cite title="Clean Code">Clean Code</cite></footer>
+                </blockquote>
+            </div>
+        </div>
+        <hr class="w-50">
+
+    </div>
+
+<!--// Charts -->
+
+{% endblock %}
+
+{% block js_links %}
+<script src="{% static 'skills/vendor/Chart.bundle.js' %}"></script>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    var ctx = document.getElementById("myChart").getContext('2d');
+    // For a pie chart
+    var config = {
+        type: 'pie',
+        data: {
+            labels: {% autoescape off %}{{ data_labels }}{% endautoescape %},
+            datasets: [{
+                data: {{ data_chart }},
+                backgroundColor: {% autoescape off %}{{ data_colors }}{% endautoescape %},
+                // hoverBorderColor: ['Grey', 'Grey', 'Grey'],
+                hoverBackgroundColor: {% autoescape off %}{{ data_hover_colors }}{% endautoescape %},
+                // hoverBorderWidth: [5, 5, 5],
+                // borderWidth: [20, 20, 20],
+                // borderColor: ['Red', 'Red', 'Red'],
+                label: 'General Skills'
+            }]
+        },
+        options: {
+            responsive: true,
+            tooltips: {
+                enabled: true,
+                mode: 'single',
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        return data.datasets[0].data[tooltipItem.index] + ' %';
+                    }
+                }
+            },
+            // rotation: 120,
+            // circumference: 8,
+            // animateScale: true
+        }
+    };
+
+    var myPieChart = new Chart(ctx, config);
+
+</script>
+
+{% endblock %}
+
+{% comment %}
+
+<!-- http://logicbox.net/jquery/simplyscroll/#install -->
+<script type="text/javascript">
+    $("#scroller").simplyScroll({
+        speed: 1,
+        pauseOnHover: false
+        /// customClass	'simply-scroll'	Class name for styling
+        // frameRate	24	Number of movements/frames per second
+        // speed	1	Number of pixels moved per frame, in 'loop' mode must be divisible by total width of scroller
+        // orientation	'horizontal'	'horizontal or 'vertical' - not to be confused with device orientation
+        // direction	'forwards'	'forwards' or 'backwards'
+        // auto	true	Automatic scrolling, use false for button controls
+        // autoMode	'loop'	auto = true, 'loop' or 'bounce', (disables buttons)
+        // manualMode	'end'	auto = false, 'loop' or 'end' (end-to-end)
+        // pauseOnHover	true	Pause scroll on hover (auto only)
+        // pauseOnTouch	true	Touch enabled devices only (auto only)
+        // pauseButton	false	Creates a pause button (auto only)
+        // startOnLoad	false	Init plugin on window.load (to allow for image loading etc)
+        // initialOffset	0	Start with an initial pixel offset 
+    });
+</script>
+{% endcomment %}

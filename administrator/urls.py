@@ -35,4 +35,15 @@ urlpatterns = [
     url(r'^cv/education/add/$', views.EducationCreate.as_view(), name='education_create'),
     url(r'^cv/education/edit/(?P<pk>[0-9]+)/$', views.EducationUpdate.as_view(), name='education_update'),
     url(r'^cv/education/(?P<pk>[0-9]+)/delete/$', views.EducationDelete.as_view(), name='education_delete'),
+    # /skill/fields
+    url(r'^skill/fields/$', views.FieldIndexView.as_view(), name='field_index'),
+    url(r'^skill/fields/add/$', views.FieldCreate.as_view(), name='field_create'),
+    url(r'^skill/fields/edit/(?P<pk>[0-9]+)/$', views.FieldUpdate.as_view(), name='field_update'),
+    url(r'^skill/fields/(?P<pk>[0-9]+)/delete/$', views.FieldDelete.as_view(), name='field_delete'),
+    # /skill/skills
+    url(r'^skill/skills/$', views.SkillIndexView.as_view(), name='skill_index'),
+    url(r'^skill/skills/add/$', views.SkillCreate.as_view(), name='skill_create'),
+    url(r'^skill/skills/edit/(?P<pk>[0-9]+)/$', views.SkillUpdate.as_view(), name='skill_update'),
+    url(r'^skill/skills/(?P<pk>[0-9]+)/delete/$', views.SkillDelete.as_view(), name='skill_delete'),
+    
 ]

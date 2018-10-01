@@ -37,6 +37,9 @@ python manage.py shell
 #Importar los modelos en la Shell de Python
 from [NameApplication].models import [Model]    #Ej: from blog.models import Post
 
+#Create a new Object in Shell
+Post.objects.create(author=me, title='Sample title', text='Test')
+
 #Realizar 'Consulta' SELECT *...
 [Model].objects.all()   # Ej: Post.objects.all()
 
@@ -59,3 +62,9 @@ UPDATE SQLITE_SEQUENCE SET seq = n WHERE name = 'blog_post'
 ## Just add following line in to a Django view function:
 
 import pdb; pdb.set_trace()
+
+##########################################################################################
+################################  D E P E N D E N C I E S  ###############################
+##########################################################################################
+# pip install Pillow                - https://github.com/python-pillow/Pillow
+# pip install django-colorfield     - https://github.com/jaredly/django-colorfield

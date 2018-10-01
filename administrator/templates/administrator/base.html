@@ -49,8 +49,8 @@
                     <a href="/administrator/aboutme"><i class="fa fa-user" aria-hidden="true" aria-expanded="false"></i> About Me</a>
                 </li>
                 <li  class="{% active 'cv' %}">
-                  <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-briefcase" aria-hidden="true"></i> CV</a>
-                    <ul class="collapse list-unstyled components" id="pageSubmenu">
+                  <a href="#pageCv" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-briefcase" aria-hidden="true"></i> CV</a>
+                    <ul class="collapse list-unstyled components" id="pageCv">
                         <li class="{% active 'cv' %}">
                             <a href="/administrator/cv">
                                 <i class="fa fa-clone" aria-hidden="true"></i>&nbsp;
@@ -71,8 +71,22 @@
                         </li>
                     </ul>
                 </li>
-                <li  class="{% active 'skills' %}">
-                    <a href="/administrator/skills"><i class="fa fa-code" aria-hidden="true"></i> Skills</a>
+                <li  class="{% active 'skill' %}">
+                    <a href="#pageSkill" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-code" aria-hidden="true"></i> Skills</a>
+                    <ul class="collapse list-unstyled components" id="pageSkill">
+                        <li class="{% active 'skill/fields' %}">
+                            <a href="/administrator/skill/fields">
+                                <i class="fa fa-clone" aria-hidden="true"></i>&nbsp;
+                                Fields
+                            </a>
+                        </li>
+                        <li class="{% active 'skill/skills' %}">
+                            <a href="/administrator/skill/skills">
+                                <i class="fa fa-list-alt" aria-hidden="true"></i>&nbsp;
+                                Skills
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li  class="{% active 'cloudfiles' %}">
                     <a href="/administrator/cloudfiles"><i class="fa fa-skyatlas" aria-hidden="true"></i> Cloud Files</a>
@@ -178,6 +192,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     -->
     <script src="{% static 'administrator/js/jquery.growl.js' %}"></script>
+    <script src="{% static 'main/js/init.js' %}"></script>
 
     {% block js_links %}
     

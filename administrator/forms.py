@@ -1,5 +1,8 @@
 from django import forms
+from colorfield.fields import ColorWidget
+
 from cv.models import Experience, Education, Mycv
+from skills.models import Field, Skill
 
 class ExperienceForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -50,3 +53,22 @@ class ResumeForm(forms.ModelForm):
     class Meta:
         model = Mycv
         fields= ['display']
+
+class FieldForm(forms.ModelForm):
+    name = forms.CharField(max_length=200, help_text='Field Name', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Field Name'}))
+    color = forms.CharField(widget=ColorWidget)
+
+    class Meta:
+        model = Field
+        fields = ['name', 'color']
+
+class SkillForm(forms.ModelForm):
+    name = forms.CharField(max_length=200, help_text='Skill Name', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Skill Name'}))
+    percentage = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '50'}),
+                                                       error_messages={'max_value': '100', 'min_value': '0'})
+    image = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
+    order = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Skill
+        fields = ['name', 'percentage', 'image', 'field', 'order']

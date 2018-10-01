@@ -1,6 +1,7 @@
 import re
 from django import template
 from django.template.defaultfilters import stringfilter
+import math
 from django.urls import reverse, NoReverseMatch
 
 register = template.Library()
@@ -30,6 +31,8 @@ def formatFormAdminTitle(value):
         value = value.replace('/administrator/', '')
     elif 'cv' in value:
         value = value.replace('/administrator/cv/', '')
+    elif 'skill' in value:
+        value = value.replace('/administrator/skill/', '')
     else:
         value = value.replace('/administrator/', '')
 
@@ -48,6 +51,53 @@ def formatStatic(value):
 def limitext(value):
     return value[:405] + '...'
 
+# Carousel Methods
+@register.filter
+def imagesPerSlide(value, arg):
+    try:
+        return math.trunc(divide(value, arg))
+    except (ValueError):
+        return None
+
+@register.filter
+def rangeImagesPerSlide(value, arg):
+    try:
+        return filter_range(0, imagesPerSlide(value, arg))
+    except (ValueError):
+        return None
+        
+
+# Divide by Arguments
+@register.filter
+def divide(value, arg):
+    try:
+        return int(value) / int(arg)
+    except (ValueError, ZeroDivisionError):
+        return None
+
+@register.filter
+def truncate(value):
+    return math.trunc(int(value))
+
+# Remainder by Arguments
+@register.filter
+def remainder(value, arg):
+    try:
+        return int(value) % int(arg)
+    except (ValueError):
+        return None
+
+# Remainder by Arguments
+@register.filter
+def sum(value, arg):
+    try:
+        return int(value) + int(arg)
+    except (ValueError):
+        return None
+
+@register.filter(name='range')
+def filter_range(start, end):
+  return range(start, end)
 
 @register.simple_tag(takes_context=True)
 def active(context, pattern_or_urlname):
