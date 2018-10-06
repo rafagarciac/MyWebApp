@@ -86,6 +86,11 @@ class Skill(models.Model):
 
         return sorted(skills, key=attrgetter(orderBy))
 
+    
+    # Return the last order + 1
+    def GetOrderMaxValue(self):
+        return self.objects.all().aggregate(largest=models.Max('order'))['largest'] + 1
+
 
     def __str__(self):
         return "{0} .- {1}% .- {2} -. {3}".format(self.name, self.percentage.__str__(), self.order.__str__(), self.field.name)

@@ -40,21 +40,27 @@
                         <div class="container">
                     
                 {% endif %}
-                    <img src='{{ skill.image | formatStatic }}' class="img-fluid float-left ml-5 ml-md-0" width="200px" height="200px" alt=''/>
 
+                {# Conditional Tree Perform & Improve this code-section #}
+                {% if forloop.counter0 == 0 or forloop.counter0 == 5 or forloop.counter0 == 10 or forloop.counter0 == 15 or forloop.counter0 == 20 or forloop.counter0 == 30 %}
+                    <img src='{{ skill.image | formatStatic }}' class="img-fluid float-left ml-5 ml-md-0" style="width: 200px; height: 200px;" alt='{{skill.image}}'/>
+                {% elif forloop.counter0 == 1 or forloop.counter0 == 6 or forloop.counter0 == 11 or forloop.counter0 == 16 or forloop.counter0 == 21 or forloop.counter0 == 31 %}
+                    <img src='{{ skill.image | formatStatic }}' class="img-fluid float-left d-none d-sm-block" style="width: 200px; height: 200px;" alt='{{skill.image}}'/>
+                {% elif forloop.counter0 == 2 or forloop.counter0 == 7 or forloop.counter0 == 12 or forloop.counter0 == 17 or forloop.counter0 == 22 or forloop.counter0 == 32 %}
+                    <img src='{{ skill.image | formatStatic }}' class="img-fluid d-none d-md-block float-left" style="width: 200px; height: 200px;" alt='{{skill.image}}'/>
+                {% elif forloop.counter0 == 3 or forloop.counter0 == 8 or forloop.counter0 == 13 or forloop.counter0 == 18 or forloop.counter0 == 23 or forloop.counter0 == 33 %}
+                    <img src='{{ skill.image | formatStatic }}' class="img-fluid d-none d-md-block float-left" style="width: 200px; height: 200px;" alt='{{skill.image}}'/>
+                {% elif forloop.counter0 == 4 or forloop.counter0 == 9 or forloop.counter0 == 14 or forloop.counter0 == 19 or forloop.counter0 == 24 or forloop.counter0 == 34 %}
+                    <img src='{{ skill.image | formatStatic }}' class="img-fluid d-none d-xl-block float-left" style="width: 200px; height: 200px;" alt='{{skill.image}}'/>
+                {% else %}
+                    <img src='{{ skill.image | formatStatic }}' class="img-fluid float-left ml-5 ml-md-0" style="width: 200px; height: 200px;" alt='{{skill.image}}'/>
+                {% endif %}
+                    
             {% endfor %}
                 </div>
             </div>
 
         {% endwith %}
-                    <!-- <div class="carousel-caption d-none d-md-block">
-                        <h5>Sample Text</h5>
-                        <p>...</p>
-                    </div> -->
-                    <!-- <img src='https://placehold.it/200x200' class="img-fluid float-left d-none d-sm-block" alt='' />
-                    <img src='https://placehold.it/200x200' class="img-fluid d-none d-md-block float-left" alt='' />
-                    <img src='https://placehold.it/200x200' class="img-fluid d-none d-md-block float-left" alt='' />
-                    <img src='https://placehold.it/200x200' class="img-fluid d-none d-xl-block float-left" alt='' /> -->
                         
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -75,8 +81,10 @@
         <div class="row mt-4">
                 <div class="col-12 col-md-1"></div>
             <div class="col-12 col-md-4">
-                <canvas id="myChart" width="400" height="340"></canvas>
+                <!-- Pie Chart -->
+                <canvas id="myPieChart" width="400" height="340"></canvas>
             </div>
+
             <div class="col-12 col-md-6">
                 <!-- Skill Technologies Bars -->
                 <h2>My Skills</h2>
@@ -91,17 +99,27 @@
             <div class="col-12 col-md-1"></div>
         </div>
         <hr class="w-50">
+
         <!-- Quote -->
         <div class="row mt-5 mb-5">
             <div class="container">
                 <blockquote class="blockquote">
-                    <p class="mb-0">Say what you mean & mean what you say.</p>
+                    <p class="mb-0">{% lorem 1 %}</p>
                     <footer class="blockquote-footer">Robert C. Martin<cite title="Clean Code">Clean Code</cite></footer>
                 </blockquote>
             </div>
         </div>
         <hr class="w-50">
 
+        <!-- Radar Chart -->
+        <div class="row mb-3">
+            <div class="container">
+                <div class="col-12">
+                        <canvas id="myRadarChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
     </div>
 
 <!--// Charts -->
@@ -115,9 +133,11 @@
 {% block scripts %}
 
 <script>
-    var ctx = document.getElementById("myChart").getContext('2d');
-    // For a pie chart
-    var config = {
+    var ctxPie = document.getElementById("myPieChart").getContext('2d');
+    var ctxRadar = document.getElementById("myRadarChart").getContext('2d');
+    
+    // Pie Chart Configuration - http://www.chartjs.org/docs/latest/charts/doughnut.html
+    var configPie = {
         type: 'pie',
         data: {
             labels: {% autoescape off %}{{ data_labels }}{% endautoescape %},
@@ -149,32 +169,29 @@
         }
     };
 
-    var myPieChart = new Chart(ctx, config);
+    // Radar Chart configuration - http://www.chartjs.org/docs/latest/charts/radar.html#pointstyle
+    var configRadar = {
+        type: 'radar',
+        data: {
+            labels: {% autoescape off %}{{ data_labels }}{% endautoescape %},
+            datasets: [{
+                label: 'Professional Skills',
+                data: {{ data_chart }},
+                backgroundColor: {% autoescape off %}{{ data_colors }}{% endautoescape %},
+                pointStyle: 'circle'
+            }]
+        },
+        options: {
+            scale: {
+                // Hides the scale
+                display: true
+            }
+        }
+    };
+
+    var myPieChart = new Chart(ctxPie, configPie);
+    var myRadarChart = new Chart(ctxRadar, configRadar);
 
 </script>
 
 {% endblock %}
-
-{% comment %}
-
-<!-- http://logicbox.net/jquery/simplyscroll/#install -->
-<script type="text/javascript">
-    $("#scroller").simplyScroll({
-        speed: 1,
-        pauseOnHover: false
-        /// customClass	'simply-scroll'	Class name for styling
-        // frameRate	24	Number of movements/frames per second
-        // speed	1	Number of pixels moved per frame, in 'loop' mode must be divisible by total width of scroller
-        // orientation	'horizontal'	'horizontal or 'vertical' - not to be confused with device orientation
-        // direction	'forwards'	'forwards' or 'backwards'
-        // auto	true	Automatic scrolling, use false for button controls
-        // autoMode	'loop'	auto = true, 'loop' or 'bounce', (disables buttons)
-        // manualMode	'end'	auto = false, 'loop' or 'end' (end-to-end)
-        // pauseOnHover	true	Pause scroll on hover (auto only)
-        // pauseOnTouch	true	Touch enabled devices only (auto only)
-        // pauseButton	false	Creates a pause button (auto only)
-        // startOnLoad	false	Init plugin on window.load (to allow for image loading etc)
-        // initialOffset	0	Start with an initial pixel offset 
-    });
-</script>
-{% endcomment %}

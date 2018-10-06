@@ -32,7 +32,7 @@
                 <tr>
                     <th scope="row">{{field.id}}</th>
                     <td>{{field.name}}</td>
-                    <td></td>
+                    <td><div style="width: 30px; height: 30px; background-color: {{ field.color }}; border: solid 1.5px black;"></div> {{field.color}} </td>
                     <td><a href="{% url 'administrator:field_update' field.pk %}" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                     <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#expModal{{ field.pk }}">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>

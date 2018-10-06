@@ -284,7 +284,7 @@ class SkillIndexView(generic.ListView):
     context_object_name = "skills"
 
     def get_queryset(self):
-        return Skill.objects.all()
+        return Skill.objects.all().order_by('order')
 
 class SkillCreate(CreateView):
     model = Skill

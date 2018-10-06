@@ -63,6 +63,12 @@ class FieldForm(forms.ModelForm):
         fields = ['name', 'color']
 
 class SkillForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SkillForm, self).__init__(*args, **kwargs)
+        # If the form.instance.pk it's None means that the form came from CreateView, so generate the Max value Order
+        if self.instance.pk is None:
+            self.initial['order'] = Skill.GetOrderMaxValue(Skill)
+            
     name = forms.CharField(max_length=200, help_text='Skill Name', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Skill Name'}))
     percentage = forms.DecimalField(widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '50'}),
                                                        error_messages={'max_value': '100', 'min_value': '0'})
