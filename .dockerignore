@@ -1,0 +1,7 @@
+# Files we don't want to add to our docker image
+Dockerfile
+docker-compose.yml
+.vscode
+Design Screenshots
+.git
+.gitignore
