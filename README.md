@@ -1,6 +1,7 @@
 # Project Title
 
-One Paragraph of project description goes here
+The project idea it's a Web Page dinamical and responsive where the users can modify variables, styles and content of each own page.
+This projects it's made with ❤️🤟🏻  
 
 ## Getting Started
 
@@ -34,7 +35,7 @@ End with an example of getting some data out of the system or using it for a lit
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+TODO
 
 ### Break down into end to end tests
 
@@ -54,17 +55,23 @@ Give an example
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+@sergioarroyop TODO
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Python 3.7.0](https://www.python.org/downloads/) - The web framework used
+* [Django Framework v2.1](https://www.djangoproject.com/download/) - Dependency Management
+* [Javascript](https://developer.mozilla.org/en/docs/Web/JavaScript) - Used to generate RSS Feeds
+* [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Used to generate RSS Feeds
+* [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) - Used to generate RSS Feeds
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+1. 🍴 Fork this repo
+2. 👀️ Follow the contributing guidelines outlined in [CONTRIBUTING.md](CONTRIBUTING.md).
+3. 🔧 Make some awesome changes!
+4. 👉 [Make a pull request](https://github.com/rafagarciac/MyWebApp/pulls)
+5. 🎉 Get your pull request approved—success!
 
 ## Versioning
 
@@ -72,16 +79,38 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Rafael García** - *Principal Developer* - [GitHub](https://github.com/rafagarciac)
+* **Sergio Arroyo** - *Front-End Developer & SysAdmin* - [GitHub](https://github.com/sergioarroyop)
+* **Miguel Ângelo** - *Developer & Documentator* - [GitHub](https://github.com/MADPT)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
 * Hat tip to anyone whose code was used
 * Inspiration
 * etc
+
+## License
+
+MIT License
+
+Copyright (c) 2018 Rafael García Cuéllar
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
