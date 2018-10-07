@@ -68,3 +68,10 @@ import pdb; pdb.set_trace()
 ##########################################################################################
 # pip install Pillow                - https://github.com/python-pillow/Pillow
 # pip install django-colorfield     - https://github.com/jaredly/django-colorfield
+
+##########################################################################################
+###################################  G I T  M E R G E ####################################
+##########################################################################################
+# git checkout master
+# git merge develop
+# git push -u origin master
