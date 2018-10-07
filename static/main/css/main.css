@@ -60,3 +60,8 @@ body{
 #job{
     margin-top: 6%;
 }
+
+.img-fluid-logo {
+    max-width: 70%;
+    height: auto;
+}
