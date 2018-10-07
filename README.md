@@ -21,7 +21,7 @@ python manage.py runserver
 ```
 
 Now the application it's running in the ```http://127.0.0.1:8000``` url.
-![](https://github.com/rafagarciac/MyWebApp/blob/master/Design%20Screenshots/demo.PNG)
+![](https://github.com/rafagarciac/MyWebApp/blob/develop/Design%20Screenshots/Demo.PNG)
 
 ## Access to Administrator & Admin Dashboard
 
