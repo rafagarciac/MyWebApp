@@ -14,14 +14,26 @@ This projects it's made with ❤️🤟🏻
 
 ### Run the application
 
-Once you installed all prerequisites, now you have to run the application in localhost int the port ```:8000``` for do this, run the next command: 
+Once you've installed all prerequisites, now you have to run the application in localhost with the port ```:8000``` for doing this, run the next command: 
 
 ```python
 python manage.py runserver
 ```
 
-Now the application it's running in the ```http://127.0.0.1:8000``` url.
+Now the application will be running in ```http://127.0.0.1:8000``` url.
+
 ![](https://github.com/rafagarciac/MyWebApp/blob/develop/Design%20Screenshots/Demo.PNG)
+
+### Run Application with Docker-Compose
+
+First of all you should have installed Docker and Docker-compose. You can follow these steps for doing this:
+
+1. Install Docker (https://docs.docker.com/install/)
+2. Install Docker-compose (https://docs.docker.com/compose/install/)
+
+Once you've installed Docker and Docker-compose just run this from the repository root folder:
+
+```docker-compose up -d --build```
 
 ## Access to Administrator & Admin Dashboard
 
@@ -48,10 +60,6 @@ Explain what these tests test and why
 Give an example
 ```
 
-## Deployment
-
-@sergioarroyop TODO
-
 ## Built With
 
 * [Python 3.7.0](https://www.python.org/downloads/) - The web framework used
@@ -75,7 +83,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## Authors
 
 * **Rafael García** - *Principal Developer* - [GitHub](https://github.com/rafagarciac)
-* **Sergio Arroyo** - *Front-End Developer & SysAdmin* - [GitHub](https://github.com/sergioarroyop)
+* **Sergio Arroyo** - *Front-End Developer & DevOps* - [GitHub](https://github.com/sergioarroyop)
 
 ## Contributors
 
