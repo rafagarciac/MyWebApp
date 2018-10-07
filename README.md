@@ -24,7 +24,7 @@ Now the application will be running in ```http://127.0.0.1:8000``` url.
 
 ![](https://github.com/rafagarciac/MyWebApp/blob/develop/Design%20Screenshots/Demo.PNG)
 
-### Run Application with Docker-Compose
+### Run Application with Docker-Compose 🐋
 
 First of all you should have installed Docker and Docker-compose. You can follow these steps for doing this:
 
