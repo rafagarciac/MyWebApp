@@ -1,7 +1,7 @@
-# MWPA Project (My Web Personal Application) - Minimal & Simply CMS
+# MPWA Project (My Personal Web Application) - Minimal & Simply CMS
 
-The project idea it's a Web Page dinamical and responsive where the users can modify variables, styles and content of each own page.
-This projects it's made with ❤️🤟🏻  
+The project idea is a dynamical and responsive Web Page where the users can modify variables, styles and content of each own page.
+This projects it's made with ❤️  
 
 ## Getting Started
 
