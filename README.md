@@ -37,7 +37,10 @@ Once you've installed Docker and Docker-compose just run this from the repositor
 
 ## Access to Administrator & Admin Dashboard
 
-TODO
+To access to the Administration Panel you have to go to this url: ```http://127.0.0.1:8000/administrator/```
+And the your credential will be:
+- User:     ```usergithub```
+- Password: ```freesource18```
 
 ## Running the tests
 

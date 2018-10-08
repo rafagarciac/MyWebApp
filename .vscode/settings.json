@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\PC_Gaming\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe"
+    "python.pythonPath": "C:\\Users\\PC_Gaming\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe",
+    "editor.fontFamily": "Consolas, 'Courier New', monospace",
+    "editor.tabSize": 4
 }
