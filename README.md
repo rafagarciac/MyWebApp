@@ -85,7 +85,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Rafael García** - *Principal Developer* - [GitHub](https://github.com/rafagarciac)
+* **Rafael García** - *Head Developer* - [GitHub](https://github.com/rafagarciac)
 * **Sergio Arroyo** - *Front-End Developer & DevOps* - [GitHub](https://github.com/sergioarroyop)
 
 ## Contributors
