@@ -1,0 +1,6 @@
+django
+psycopg2
+south
+stripe
+pillow
+django-colorfield
