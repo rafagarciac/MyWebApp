@@ -43,7 +43,7 @@ def formatFormAdminTitle(value):
 @register.filter
 @stringfilter
 def formatStatic(value):
-    return '/static/media_images/' + value
+    return '/static/media/' + value
 
 # Limit the Post Description --> Contenttext in the DB
 @register.filter

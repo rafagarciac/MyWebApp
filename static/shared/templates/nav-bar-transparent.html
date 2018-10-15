@@ -5,8 +5,8 @@
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand col-8 col-md-3" href="/">
-        <img src="{% static 'admin/img/logo.png' %}" class="w-50" alt="Logo">
+    <a class="navbar-brand col-8 col-sm-3 text-left text-sm-center" href="/">
+        <img src="{% static 'admin/img/logo.png' %}" class="img-fluid-logo" alt="Logo">
     </a>
     <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavId">
         <ul class="navbar-nav">
@@ -27,7 +27,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {% active 'files' %}" href="/files">Cloud Files <span class="sr-only"></span></a>
+                <a class="nav-link {% active 'cloudfiles' %}" href="/cloudfiles">Cloud Files <span class="sr-only"></span></a>
             </li>
         </ul>
     </div>

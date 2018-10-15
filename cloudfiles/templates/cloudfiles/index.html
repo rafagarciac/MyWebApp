@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters %}
+{# include 'blog/blogdetail.html' #}
+{% block title %}Cloud Files{% endblock %}
+{% block css_links %}
+    <!-- FontAwesome v5.1.0 -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    
+    <!-- My Css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}" />
+{% endblock %}
+
+{% block nav_bar %}
+    {% include "nav-bar-dark.html" %}
+{% endblock %}
+    
+{% block content %}
+
+    {% for folder in folders %}
+        <p><a href="{% url 'cloudfiles:folder_system' folder.path|add:folder.name %}">{{ folder.name }} - {{ folder.level }}</a></p>
+        
+        {% if folder.subfolders|length != 0 %}
+            {% for subfolder in folder.subfolders %}
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'cloudfiles:folder_system' subfolder.path|add:subfolder.name %}">{{ subfolder.name }} - {{ subfolder.level }}</a></p>
+            {% endfor %}
+
+        {% else %}
+        {% endif %}
+        
+    {% empty %}
+        <p>The System file is empty</p>
+    {% endfor %}
+
+{% endblock  %}
+
+   

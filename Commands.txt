@@ -75,3 +75,45 @@ import pdb; pdb.set_trace()
 # git checkout master
 # git merge develop
 # git push -u origin master
+
+##########################################################################################
+###################################   T E S T I N G  #####################################
+##########################################################################################
+# https://docs.djangoproject.com/en/2.1/topics/testing/overview/#running-tests
+
+                        ### I M P O R T A N T ###
+The test methods inside your test class must start with keyword test to run.
+https://stackoverflow.com/questions/2037364/django-test-runner-not-finding-tests
+    #####################################################################
+
+## Run all tests of the Application
+$ ./manage.py test
+
+## Run all the tests in the animals.tests module
+$ ./manage.py test animals.tests
+
+## Run all the tests found within the 'animals' package
+$ ./manage.py test animals
+
+## Run just one test case
+$ ./manage.py test animals.tests.AnimalTestCase
+
+## Run just one test method
+$ ./manage.py test animals.tests.AnimalTestCase.test_animals_can_speak
+
+##########################################################################################
+###########################   E X P O R T / I M P O R T  #################################
+##########################################################################################
+
+## Export Data Command - dumpdata - https://docs.djangoproject.com/en/2.1/ref/django-admin/#dumpdata
+#################################
+manage.py dumpdata --all --format json --natural-primary --indent 4 --verbosity 1 > exports/db.json
+manage.py dumpdata --all --format xml --natural-primary --indent 4 --verbosity 1 > exports/db.xml
+# This serializer is only available if PyYAML is installed.
+manage.py dumpdata --all --format yaml --natural-primary --indent 4 --verbosity 1 > exports/db.yaml
+
+## Import Data Command - loaddata - https://docs.djangoproject.com/en/2.1/ref/django-admin/#loaddata
+manage.py loaddata exports/db.json
+
+## SQLMigrate - Print SQL Commands
+manage.py sqlmigrate blog 0004 > test.sql

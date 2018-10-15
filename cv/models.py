@@ -5,7 +5,7 @@ from django.urls import reverse
 
 # Create your models here.
 def get_image_path(instance, filename):
-    return os.path.join(filename)
+    return os.path.join("images/" + filename)
 
 class Mycv(models.Model):
     display = models.BooleanField(blank=False, default=False)

@@ -35,7 +35,7 @@ Once you've installed Docker and Docker-compose just run this from the repositor
 
 ```docker-compose up -d --build```
 
-## Access to Administrator & Admin Dashboard
+## Access to Administrator & Admin Dashboard 📈
 
 To access to the Administration Panel you have to go to this url: ```http://127.0.0.1:8000/administrator/```
 And the your credential will be:
@@ -48,8 +48,13 @@ TODO
 
 ### Debug
 
-Explain what these tests test and why
+2 Ways!
+[# Debug with Visual Studio Code](https://code.visualstudio.com/)
+```
+Give an example
+```
 
+[# Debug with ```pdb - The Python Debugger``` statement](https://docs.python.org/3.7/library/pdb.html)
 ```
 Give an example
 ```
