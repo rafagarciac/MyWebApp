@@ -46,28 +46,6 @@ And the your credential will be:
 
 TODO
 
-### Debug
-
-2 Ways!
-[# Debug with Visual Studio Code](https://code.visualstudio.com/)
-```
-Give an example
-```
-
-[# Debug with ```pdb - The Python Debugger``` statement](https://docs.python.org/3.7/library/pdb.html)
-```
-Give an example
-```
-
-### And coding style tests
-
-**TODO**
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Built With
 
 * [Python 3.7.0](https://www.python.org/downloads/) - The web framework used
@@ -96,9 +74,6 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## Contributors
 
 * **Miguel Ângelo** - *Developer & Documentator* - [GitHub](https://github.com/MADPT)
-
-**TODO Contributors List**
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## Acknowledgments
 
