@@ -4,59 +4,60 @@
 {# include 'blog/blogdetail.html' #}
 {% block title %}Blog{% endblock %}
 {% block css_links %}
-    <!-- FontAwesome v5.1.0 -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    
-    <!-- My Css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
+<!-- FontAwesome v5.1.0 -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+    integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+<!-- My Css -->
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}" />
 {% endblock %}
 
 {% block nav_bar %}
-    {% include "nav-bar-dark.html" %}
+{% include "nav-bar-dark.html" %}
 {% endblock %}
-    
+
 {% block content %}
-    
+<div class="container">
+
     {# My First for in Python !! 🎉🎉#}
     <h1 class="display-3 text-center pb-3 pt-3">List of My Posts </h1>
-    
-    <div class="container-fluid">
-        <div class="container">
+    <div class="card-columns">
 
-            {% for post in all_posts %}
+        {% for post in all_posts %}
 
-                <a href="{% url 'blog:blogdetail' post.idpost %}">
-                    <div class="row shadowbox mb-5">
-                        <div class="col-3 p-0">
-                            <img src="{{ post.image | formatStatic }}" alt="" class="img-fluid"/>
-                        </div>
-                        <div class="col-9">
-                            <!--Title -->
-                            <h2>{{ post.title }}</h2>
-                            <!--Content-->
-                            <p>{{ post.textcontent|limitext }}</p>
-                            <!--Author & Date-->
-                            <div class="row justify-content-around">
-                                <div class="col-12 col-md-3 text-center text-md-left"><p><small class="text-muted"><i class="fas fa-user"></i> {{ post.author }} </small></p></div>
-                                <div class="col-12 col-md-3 text-center text-md-left">
-                                    <p>
-                                        {% for tag in post.tags_as_list %}
-                                            <small class="text-muted"><i class="fas fa-tags"></i> {{ tag }} </small>
-                                        {% endfor %}
-                                    </p>
-                                </div>
+        <div class="card shadowbox mb-5">
+            <a href="{% url 'blog:blogdetail' post.idpost %}">
 
-                                <div class="col-12 col-md-3 text-center text-md-left"><p><small class="text-muted"><i class="far fa-clock"></i> {{ post.date }} </small></p></div>
+                <img src="{{ post.image | formatStatic }}" alt="" class="card-img-top" />
+                <div class="card-body">
+                    <!--Title -->
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <!--Content-->
+                    <p class="card-text">{{ post.textcontent|limitext }}</p>
+                    <!--Author & Date-->
+                    <div class="card-footer">
+                        <div class="row justify-content-around">
+                            <div class="col-12 col-md-3 text-center text-md-left">
+                                <p><small class="text-muted"><i class="fas fa-user"></i> {{ post.author }} </small></p>
+                            </div>
+                            <div class="col-12 col-md-3 text-center text-md-left">
+                                <p>
+                                    {% for tag in post.tags_as_list %}
+                                    <small class="text-muted"><i class="fas fa-tags"></i> {{ tag }} </small>
+                                    {% endfor %}
+                                </p>
+                            </div>
+
+                            <div class="col-12 col-md-3 text-center text-md-left">
+                                <p><small class="text-muted"><i class="far fa-clock"></i> {{ post.date }} </small></p>
                             </div>
                         </div>
                     </div>
-                </a>
-            {% endfor %}
-
+                </div>
         </div>
-  </div> 
-  
+        </a>
+        {% endfor %}
+    </div>
+</div>
 {% endblock  %}
-
-   
